@@ -1,0 +1,3 @@
+python-telegram-bot
+
+git+ssh://git@github.com/2vitalik/shared_utils.git
