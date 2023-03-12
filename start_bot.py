@@ -1,7 +1,7 @@
 import logging
 
 from telegram import Bot
-from telegram.ext import Updater, MessageHandler, Filters
+from telegram.ext import Updater, MessageHandler, Filters, CommandHandler
 from shared_utils.conf import conf as shared_conf
 
 import conf
@@ -24,6 +24,8 @@ def start_bot():
 
     updater = Updater(token=conf.telegram_token)
     dispatcher = updater.dispatcher
+    dispatcher.add_handler(CommandHandler('text', text_handler.text))
+    dispatcher.add_handler(CommandHandler('vote', text_handler.vote))
     dispatcher.add_handler(MessageHandler(Filters.text, text_handler.default))
     dispatcher.add_handler(MessageHandler(Filters.status_update.new_chat_members,
                                           members_handler.default))
