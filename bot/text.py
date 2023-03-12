@@ -98,4 +98,7 @@ class TextHandler:
 
     @basic_handler
     def default(self):
-        self.msg = self.send('🤷🏻‍♂️ Інтерфейс взаємодії поки що не реалізован')
+        if self.update.message.chat_id != self.update.message.from_user.id:
+            return
+        self.msg = self.send('🤷🏻‍♂️ Інтерфейс взаємодії з ботом поки що '
+                             'не реалізован')
