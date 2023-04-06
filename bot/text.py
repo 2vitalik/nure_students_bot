@@ -1,3 +1,5 @@
+import re
+
 import shared_utils.api.telegram.telegram_utils as tg
 
 import conf
@@ -25,7 +27,8 @@ class TextHandler:
         chats = []
         slugs = options.split(', ')
         for slug in slugs:
-            if '-' in slug:
+            m = re.fullmatch(f'\d\d-\d{1,2}', slug)
+            if m:
                 chats.append(f'ПЗПІ-{slug}')
 
             groups_count = {
