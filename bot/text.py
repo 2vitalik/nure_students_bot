@@ -26,10 +26,13 @@ class TextHandler:
 
         chats = []
         slugs = options.split(', ')
+
         for slug in slugs:
+
             m = re.fullmatch(f'\d\d-\d{1,2}', slug)
             if m:
                 chats.append(f'ПЗПІ-{slug}')
+                return
 
             groups_count = {
                 '19': 11,
@@ -42,6 +45,10 @@ class TextHandler:
                     f'ПЗПІ-{slug}-{num}'
                     for num in range(1, groups_count[slug] + 1)
                 ])
+                return
+
+            chats.append(slug)
+
         return chats
 
     @basic_handler
