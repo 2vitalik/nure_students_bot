@@ -1,10 +1,12 @@
 import logging
 
 from telegram import Bot
-from telegram.ext import Updater, MessageHandler, Filters, CommandHandler
+from telegram.ext import Updater, MessageHandler, Filters, CommandHandler, \
+    PollHandler, PollAnswerHandler
 from shared_utils.conf import conf as shared_conf
 
 import conf
+from bot.polls import process_poll, process_poll_answer
 from bot.text import TextHandler
 from bot.members import MembersHandler
 
@@ -24,6 +26,8 @@ def start_bot():
 
     updater = Updater(token=conf.telegram_token)
     dispatcher = updater.dispatcher
+    dispatcher.add_handler(PollHandler(process_poll))
+    dispatcher.add_handler(PollAnswerHandler(process_poll_answer))
     dispatcher.add_handler(CommandHandler('text', text_handler.text))
     dispatcher.add_handler(CommandHandler('vote', text_handler.vote))
     dispatcher.add_handler(MessageHandler(Filters.text, text_handler.default))
