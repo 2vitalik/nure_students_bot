@@ -6,36 +6,33 @@ from shared_utils.io.json import json_dump, json_dumps
 import conf
 
 
+def get_poll_path(poll_id):
+    return f'{conf.data_path}/polls/{poll_id}'
+
+
 def process_poll(update, context):
     poll = update.poll
-
-    path = f'{conf.data_path}/polls'
-    poll_id = poll.id
-
-    date = datetime.now().strftime('%Y-%m-%d %H-%M-%S')
-    json_dump(f'{path}/{poll_id}/history/{date}.json', poll.to_dict())
-    json_dump(f'{path}/{poll_id}/latest.json', poll.to_dict())
+    path = get_poll_path(poll.id)
 
     print(json_dumps(poll.to_dict()))
     print()
+
+    dt = datetime.now().strftime('%Y-%m-%d %H-%M-%S')
+
+    json_dump(f'{path}/history/{dt}.json', poll.to_dict())
+    json_dump(f'{path}/latest.json', poll.to_dict())
 
 
 def process_poll_answer(update, context):
     poll = update.poll_answer
-
-    path = f'{conf.data_path}/polls'
-    poll_id = poll.poll_id
-    user_id = poll.user.id
-    options = poll.option_ids
-    options_str = '[' + ','.join(map(str, options)) + ']'
-
-    date = datetime.now().strftime('%Y-%m-%d %H-%M-%S')
-    filename = \
-        f'{path}/{poll_id}/answers/{date} - {user_id} - {options_str}.json'
-    json_dump(filename, poll.to_dict())
-
-    append(f'{path}/{poll_id}/answers.txt',
-           f'[{date}] {user_id}: {options_str}')
+    path = get_poll_path(poll.id)
 
     print(json_dumps(poll.to_dict()))
     print()
+
+    dt = datetime.now().strftime('%Y-%m-%d %H-%M-%S')
+    user = poll.user.id
+    options = '[' + ','.join(map(str, poll.option_ids)) + ']'
+
+    json_dump(f'{path}/answers/{dt} - {user} - {options}.json', poll.to_dict())
+    append(f'{path}/answers.txt', f'[{dt}] {user}: {options}')
