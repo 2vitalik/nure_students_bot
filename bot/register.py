@@ -46,6 +46,8 @@ def register(update, context):
     chat = update.message.chat
     user = update.message.from_user
 
+    cmd = update.message.text.strip()
+
     if chat.id != user.id:
         tg_send(bot, chat.id,
                 '⚠️ Відправляйте запит на реєстрацію не тут, '
@@ -60,7 +62,11 @@ def register(update, context):
     filename = f'{conf.data_path}/register/{month}/{dt} - {user.id}.json'
     json_dump(filename, user.to_dict())
 
-    cmd = update.message.text.strip()
+    hash_value = str(abs(hash(cmd)))[:7]
+    filename = f'{conf.data_path}/messages/input/{month}/{chat.id}/' \
+               f'{dt} - {user.id} - {hash_value}.json'
+    json_dump(filename, update.message.to_dict())
+
     if not cmd.startswith('/register'):
         tg_send(bot, conf.telegram_error,
                 "Register command started not from /register, that's strange\n"

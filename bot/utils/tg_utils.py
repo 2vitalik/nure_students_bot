@@ -13,7 +13,7 @@ def tg_send(bot, chat_id, text, keyboard=None, buttons=None, silent=False):
     now = datetime.now()
     month, dt = now.strftime('%Y-%m'), now.strftime('%Y-%m-%d %H-%M-%S')
     hash_value = str(abs(hash(text)))[:7]
-    filename = f'{conf.data_path}/messages/{month}/{chat_id}/' \
+    filename = f'{conf.data_path}/messages/output/{month}/{chat_id}/' \
                f'{dt} - {chat_id} - {hash_value}.json'
 
     line = '-' * 79
