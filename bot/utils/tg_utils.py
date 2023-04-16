@@ -10,15 +10,14 @@ import conf
 
 
 def tg_send(bot, chat_id, text, keyboard=None, buttons=None, silent=False):
-    try:
-        now = datetime.now()
-        month, dt = now.strftime('%Y-%m'), now.strftime('%Y-%m-%d %H-%M-%S')
-        hash_value = str(abs(hash(text)))[:7]
-        filename = f'{conf.data_path}/messages/{month}/{chat_id}/' \
-                   f'{dt} - {chat_id} - {hash_value}.json'
+    now = datetime.now()
+    month, dt = now.strftime('%Y-%m'), now.strftime('%Y-%m-%d %H-%M-%S')
+    hash_value = str(abs(hash(text)))[:7]
+    filename = f'{conf.data_path}/messages/{month}/{chat_id}/' \
+               f'{dt} - {chat_id} - {hash_value}.json'
 
-        line = '-' * 79
-        output = f'''
+    line = '-' * 79
+    output = f'''
 {text}
 
 {line}
@@ -26,10 +25,14 @@ def tg_send(bot, chat_id, text, keyboard=None, buttons=None, silent=False):
 {line}
 {json_dumps(buttons)}
 {line}
-        '''.strip()
-        append(filename, output)
+    '''.strip()
+    append(filename, output)
 
-        return tg.send(bot, chat_id, text, keyboard, buttons, silent)
+    try:
+        message = tg.send(bot, chat_id, text, keyboard, buttons, silent)
+        append(filename, 'SENT')
+        return message
+
     except (TimedOut, RetryAfter) as e:
         # todo:
         # slack_error(f'`tg_send`  *{type(e).__name__}*: {str(e)}\n\n'
@@ -37,4 +40,7 @@ def tg_send(bot, chat_id, text, keyboard=None, buttons=None, silent=False):
         #             f'>chat_id: {chat_id}\n\n'
         #             f'>{add_quote(text)}')
         time.sleep(60)
-        return tg_send(bot, chat_id, text, keyboard, buttons, silent)
+
+        message = tg_send(bot, chat_id, text, keyboard, buttons, silent)
+        append(filename, 'DELAYED SENT')
+        return message
