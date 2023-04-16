@@ -63,7 +63,7 @@ def register(update, context):
     json_dump(filename, user.to_dict())
 
     hash_value = str(abs(hash(cmd)))[:7]
-    filename = f'{conf.data_path}/messages/input/{month}/{chat.id}/' \
+    filename = f'{conf.data_path}/messages/input/register/{month}/{chat.id}/' \
                f'{dt} - {user.id} - {hash_value}.json'
     json_dump(filename, update.message.to_dict())
 

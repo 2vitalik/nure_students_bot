@@ -1,6 +1,8 @@
 import re
+from datetime import datetime
 
 import shared_utils.api.telegram.telegram_utils as tg
+from shared_utils.io.json import json_dump
 
 import conf
 from src.utils.tg import basic_handler, tg_send
@@ -108,7 +110,23 @@ class TextHandler:
 
     @basic_handler
     def default(self):
-        if self.update.message.chat_id != self.update.message.from_user.id:
+        now = datetime.now()
+        month, dt = now.strftime('%Y-%m'), now.strftime('%Y-%m-%d %H-%M-%S')
+        text = self.update.message.text.strip()
+        hash_value = str(abs(hash(text)))[:7]
+
+        chat_id = self.update.message.chat_id
+        user_id = self.update.message.from_user.id
+
+        def get_filename(folder):
+            return f'{conf.data_path}/messages/input/text/{folder}/{month}/' \
+                   f'{chat_id}/{dt} - {user_id} - {hash_value}.json'
+
+        if chat_id != user_id:
+            json_dump(get_filename('group'), self.update.message.to_dict())
             return
+
+        json_dump(get_filename('bot'), self.update.message.to_dict())
+
         self.msg = self.send('🤷🏻‍♂️ Інтерфейс взаємодії з ботом поки що '
                              'не реалізован')
