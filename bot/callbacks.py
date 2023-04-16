@@ -9,16 +9,24 @@ import conf
 from bot.register import register_message, register_buttons
 
 
+def save_callback_json(query, callback_type):
+    now = datetime.now()
+    month, dt = now.strftime('%Y-%m'), now.strftime('%Y-%m-%d %H-%M-%S')
+    filename = f'{conf.data_path}/callbacks/{callback_type}/{month}/' \
+               f'{dt} - {query.id}.json'
+    json_dump(filename, query.to_dict())
+
+
 def callbacks(update, context):
     bot = context.bot
     query = update.callback_query
 
-    dt = datetime.now().strftime('%Y-%m-%d %H-%M-%S')
-    json_dump(f'{conf.data_path}/callbacks/{dt} - {query.id}.json',
-              query.to_dict())
-
     if query.data.startswith('register:'):
+        save_callback_json(query, 'register')
         callback_register(bot, query)
+
+    else:
+        save_callback_json(query, 'unknown')
 
 
 def coda_register(username, user_id):
