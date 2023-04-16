@@ -53,8 +53,11 @@ def register(update, context):
                 silent=True)
         return
 
-    dt = datetime.now().strftime('%Y-%m-%d %H-%M-%S')
-    json_dump(f'{conf.data_path}/register/{dt} - {user}.json', user.to_dict())
+    # Save JSON user information:
+    now = datetime.now()
+    month, dt = now.strftime('%Y-%m'), now.strftime('%Y-%m-%d %H-%M-%S')
+    filename = f'{conf.data_path}/register/{month}/{dt} - {user.id}.json'
+    json_dump(filename, user.to_dict())
 
     cmd = update.message.text.strip()
     if not cmd.startswith('/register'):
