@@ -1,3 +1,5 @@
-python-telegram-bot
+python-telegram-bot==13.*
+PyYAML
+requests
 
 git+ssh://git@github.com/2vitalik/shared_utils.git
