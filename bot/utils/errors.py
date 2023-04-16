@@ -16,5 +16,6 @@ def errors(slug):
                 message = f'<code>{slug}</code>\n' \
                           f'⚠️ <b>{type(e).__name__}</b>: {str(e)}'
                 tg_send(bot, conf.telegram_error, message)
+                raise
         return wrapped
     return decorator
