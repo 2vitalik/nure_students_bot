@@ -6,10 +6,15 @@ import up  # to go to root folder
 from shared_utils.api.coda.v2.doc import CodaDoc
 from shared_utils.io.io import read, write
 from shared_utils.io.json import json_load
+from telegram import Bot
 
 import conf
 from bot.polls import get_poll_path
 from bot.utils.errors import errors
+from bot.utils.tg_utils import tg_send
+
+
+bot = Bot(conf.telegram_token)  # todo: move to special common place
 
 
 def get_processed_count(poll_id):
@@ -88,6 +93,13 @@ def polls_to_coda():
 
             for tg_id, options in answers:
                 print('- Processing:', tg_id, options)
+
+                if tg_id not in coda_tg:
+                    # todo: Extract user information from answers JSONs
+                    tg_send(bot, conf.telegram_error,
+                            f'<code>polls_to_coda</code>\n'
+                            f'⛔️ Unknown <b>tg_id</b>: <code>{tg_id}</code>')
+                    continue
 
                 row_id = coda_tg[tg_id]
 
