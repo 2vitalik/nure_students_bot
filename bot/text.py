@@ -128,7 +128,11 @@ class TextHandler:
                 poll_ids[slug] = poll_id
                 print('Poll:', poll_id)
 
-        self.send('✔️ Опитування відправлено')
+        self.send('✔️ <i>Опитування відправлені:</i>\n' +
+                  '\n'.join([
+                      f'<b>{slug}</b>: <code>{poll_id}</code>'
+                      for slug, poll_id in poll_ids.items()
+                  ]))
 
     @basic_handler
     def default(self):
