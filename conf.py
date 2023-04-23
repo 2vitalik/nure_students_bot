@@ -16,6 +16,14 @@ chats = {
     # 'ПЗПІ-20-4': None,  # should be set in `local_conf.py`
 }
 
+coda_docs = {
+    'oop-22': 'd1GDyxjRqoL',
+}
+
+coda_tables = {
+    'oop-22': 'Students',
+}
+
 data_path = 'data'
 
 try:
