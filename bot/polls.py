@@ -8,7 +8,7 @@ from bot.utils.errors import errors
 
 
 def get_poll_path(poll_id):
-    return f'{conf.data_path}/polls/{poll_id}'
+    return f'{conf.data_path}/polls/updates/{poll_id}'
 
 
 @errors('process_poll')
@@ -38,4 +38,4 @@ def process_poll_answer(update, context):
     options = '[' + ','.join(map(str, poll.option_ids)) + ']'
 
     json_dump(f'{path}/answers/{dt} - {user} - {options}.json', poll.to_dict())
-    append(f'{path}/answers.txt', f'[{dt}] {user}: {options}')
+    append(f'{path}/answers.txt', f'[{dt}]: {user}: {options}')
