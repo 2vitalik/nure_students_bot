@@ -28,7 +28,7 @@ def process_poll(update, context):
 @errors('process_poll_answer')
 def process_poll_answer(update, context):
     poll = update.poll_answer
-    path = get_poll_path(poll.id)
+    path = get_poll_path(poll.poll_id)
 
     print(json_dumps(poll.to_dict()))
     print()
