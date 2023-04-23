@@ -62,6 +62,8 @@ def polls_to_coda():
     path = f'{conf.data_path}/polls/info'
 
     for folder in sorted(os.listdir(path)):
+        print('=' * 80)
+
         info = json_load(f'{path}/{folder}/info.json')
         print(info)
 
@@ -70,10 +72,10 @@ def polls_to_coda():
                           conf_path=f'{conf.data_path}/coda_conf')
 
             processed = get_processed_count(poll_id)
-            print(processed)
+            print('Already processed:', processed)
 
             answers = get_answers(poll_id, processed)
-            print(answers)
+            print('New answers:', answers)
             if not answers:
                 continue
 
@@ -85,7 +87,7 @@ def polls_to_coda():
             column = info['coda_column']
 
             for tg_id, options in answers:
-                print(tg_id, options)
+                print('- Processing:', tg_id, options)
 
                 row_id = coda_tg[tg_id]
 
@@ -97,6 +99,7 @@ def polls_to_coda():
                 table.update(row_id, {column: new_value})
 
             new_processed = processed + len(answers)
+            print('New processed value:', new_processed)
             set_processed_count(poll_id, str(new_processed))
 
 
