@@ -87,6 +87,11 @@ class TextHandler:
 
         data = self.input.replace('/vote', '')
         options, question, *answers = data.split('\n')
+        keys = ['??'] * len(answers)
+        for i, answer in enumerate(answers):
+            if '|' in answer:
+                key, answer = answer.split('|')
+                keys[i], answers[i] = key, answer
 
         is_anonymous = False
         if 'a+' in options:
