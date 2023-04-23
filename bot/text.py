@@ -115,12 +115,19 @@ class TextHandler:
             self.send('⚠️ Помилка в параметрах')
             return
 
-        for group, chat_id in conf.chats.items():
-            if group in chats:
-                print(group)
-                self.bot.send_poll(chat_id, question, answers,
-                                   is_anonymous=is_anonymous,
-                                   allows_multiple_answers=allows_multiple)
+        poll_ids = {}
+        for slug, chat_id in conf.chats.items():
+            if slug in chats:
+                print('Slug:', slug)
+                poll_message = self.bot.send_poll(
+                    chat_id, question, answers,
+                    is_anonymous=is_anonymous,
+                    allows_multiple_answers=allows_multiple
+                )
+                poll_id = poll_message.poll.id
+                poll_ids[slug] = poll_id
+                print('Poll:', poll_id)
+
         self.send('✔️ Опитування відправлено')
 
     @basic_handler
