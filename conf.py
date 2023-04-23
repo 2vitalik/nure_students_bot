@@ -18,10 +18,12 @@ chats = {
 
 coda_docs = {
     'oop-22': 'd1GDyxjRqoL',
+    'debug': 'd1GDyxjRqoL',
 }
 
 coda_tables = {
     'oop-22': 'Students',
+    'debug': 'Students',
 }
 
 data_path = 'data'
