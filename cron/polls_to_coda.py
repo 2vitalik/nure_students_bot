@@ -1,6 +1,7 @@
 import json
 import os
 from os.path import exists
+import up  # to go to root folder
 
 from shared_utils.api.coda.v2.doc import CodaDoc
 from shared_utils.io.io import read, write
