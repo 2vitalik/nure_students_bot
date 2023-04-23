@@ -8,6 +8,7 @@ from shared_utils.io.json import json_load
 
 import conf
 from bot.polls import get_poll_path
+from bot.utils.errors import errors
 
 
 def get_processed_count(poll_id):
@@ -55,6 +56,7 @@ def get_answers(poll_id, processed):
     return data[processed:]
 
 
+@errors('polls_to_coda')
 def polls_to_coda():
     path = f'{conf.data_path}/polls/info'
 
