@@ -7,6 +7,7 @@ from shared_utils.conf import conf as shared_conf
 
 import conf
 from bot.callbacks import callbacks
+from bot.commands.coda_tg import coda_tg
 from bot.commands.coda_update import coda_update
 from bot.polls import process_poll, process_poll_answer
 from bot.commands.register import register
@@ -36,6 +37,7 @@ def start_bot():
 
     # commands:
     d.add_handler(CommandHandler('coda_update', coda_update))
+    d.add_handler(CommandHandler('coda_tg', coda_tg))
     d.add_handler(CommandHandler('text', text_handler.text))
     d.add_handler(CommandHandler('vote', text_handler.vote))
     d.add_handler(CommandHandler('register', register))
