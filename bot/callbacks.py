@@ -6,7 +6,7 @@ from shared_utils.api.coda.v2.doc import CodaDoc
 from shared_utils.io.json import json_dump
 
 import conf
-from bot.register import register_message, register_buttons
+from bot.commands.register import register_message, register_buttons
 from bot.utils.errors import errors
 from bot.utils.tg_utils import tg_send
 

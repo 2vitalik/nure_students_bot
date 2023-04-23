@@ -8,7 +8,7 @@ from shared_utils.conf import conf as shared_conf
 import conf
 from bot.callbacks import callbacks
 from bot.polls import process_poll, process_poll_answer
-from bot.register import register
+from bot.commands.register import register
 from bot.text import TextHandler
 from bot.members import MembersHandler
 
