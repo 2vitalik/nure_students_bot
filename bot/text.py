@@ -20,6 +20,13 @@ class TextHandler:
         return tg.send(self.bot, self.chat_id, message,
                        keyboard=keyboard, buttons=buttons)
 
+    def extract_coda_column(self, options):
+        p = re.compile(r'\{([^}]+)}')
+        m = p.search(options)
+        if not m:
+            return None, options
+        return m.group(1), p.sub('', options)
+
     def get_chats(self, options):
         options = options.strip()
         if options[0] != '[' or options[-1] != ']':
@@ -94,6 +101,9 @@ class TextHandler:
             options = options.replace('m+', '')
         elif 'm-' in options:
             options = options.replace('m-', '')
+
+        coda_column, options = self.extract_coda_column(options)
+        print(coda_column)
 
         chats = self.get_chats(options)
         if not chats:
