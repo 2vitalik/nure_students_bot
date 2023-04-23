@@ -128,6 +128,17 @@ class TextHandler:
                 poll_ids[slug] = poll_id
                 print('Poll:', poll_id)
 
+        polls_info = {
+            'question': question,
+            'answers': answers,
+            'keys': keys,
+            'poll_ids': poll_ids,
+            'coda_column': coda_column,
+        }
+        dt = datetime.now().strftime('%Y-%m-%d %H-%M-%S')
+        filename = f'{conf.data_path}/polls/info/{dt}/info.json'
+        json_dump(filename, polls_info)
+
         self.send('✔️ <i>Опитування відправлені:</i>\n' +
                   '\n'.join([
                       f'<b>{slug}</b>: <code>{poll_id}</code>'
