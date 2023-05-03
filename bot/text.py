@@ -18,7 +18,7 @@ class TextHandler:
 
     def send(self, message, keyboard=None, buttons=None):
         return tg.send(self.bot, self.chat_id, message,
-                       keyboard=keyboard, buttons=buttons)
+                       keyboard=keyboard, buttons=buttons, silent=True)
 
     def extract_coda_column(self, options):
         p = re.compile(r'\{([^}]+)}')
