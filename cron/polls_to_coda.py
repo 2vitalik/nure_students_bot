@@ -90,6 +90,8 @@ def polls_to_coda():
             table_name = conf.coda_tables[slug]
             table = doc.tables[table_name]
             column = info['coda_column']
+            if not column:
+                continue
 
             for tg_id, options in answers:
                 print('- Processing:', tg_id, options)
