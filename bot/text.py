@@ -122,7 +122,8 @@ class TextHandler:
                 poll_message = self.bot.send_poll(
                     chat_id, question, answers,
                     is_anonymous=is_anonymous,
-                    allows_multiple_answers=allows_multiple
+                    allows_multiple_answers=allows_multiple,
+                    disable_notification=True,
                 )
                 poll_id = poll_message.poll.id
                 poll_ids[slug] = poll_id
