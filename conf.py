@@ -16,6 +16,10 @@ chats = {
     # 'ПЗПІ-20-4': None,  # should be set in `local_conf.py`
 }
 
+threads = {
+    # 'oop-22': None,  # should be set in `local_conf.py`
+}
+
 coda_docs = {
     'oop-22': 'd1GDyxjRqoL',
     'debug': 'd1GDyxjRqoL',
