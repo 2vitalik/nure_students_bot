@@ -20,7 +20,7 @@ def messages(update, context):
 
     def get_filename(folder):
         return f'{conf.data_path}/messages/input/all/{folder}/{month}/' \
-               f'{chat_id}/{dt} - {user_id} - {hash_value}.json'
+               f'{chat_id}/{dt} - {user_id} - h{hash_value}.json'
 
     if chat_id != user_id:
         json_dump(get_filename('group'), message.to_dict())
