@@ -5,3 +5,12 @@ grid-i_pCquwIyF:
     c-903M4ivXZB: telegram_id
     c-uKVISETOEg: group
     c-MhoqlRmaEc: telegram_input
+grid-wxwuVFFBIJ:
+  name: TelegramUsers
+  columns:
+    c-PcVXxGd_Tv: telegram_id
+    c-oNROXtGqUd: tg_first_name
+    c-xkXzyctxEP: tg_last_name
+    c-xPMWTA-IGd: tg_username
+    c-y54Ru4DBmO: tg_chats
+    c-UuWePOedom: tg_forums
