@@ -12,7 +12,7 @@ from bot.commands.coda_update import coda_update
 from bot.polls import process_poll, process_poll_answer
 from bot.commands.register import register
 from bot.text import TextHandler
-from bot.members import MembersHandler
+from bot.members import members
 from bot.utils.errors import errors
 
 
@@ -28,7 +28,6 @@ def start_bot():
     bot.send_message(conf.telegram_admin, '💬 Starting the bot...')
 
     text_handler = TextHandler()
-    members_handler = MembersHandler()
 
     updater = Updater(token=conf.telegram_token)
     d = updater.dispatcher
@@ -49,9 +48,9 @@ def start_bot():
 
     # members:
     d.add_handler(MessageHandler(Filters.status_update.new_chat_members,
-                                 members_handler.default))
+                                 members))
     d.add_handler(MessageHandler(Filters.status_update.left_chat_member,
-                                 members_handler.default))
+                                 members))
 
     # callbacks:
     d.add_handler(CallbackQueryHandler(callbacks))
