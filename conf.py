@@ -4,6 +4,7 @@ coda_token = None  # should be set in `local_conf.py`
 telegram_token = None  # should be set in `local_conf.py`
 telegram_admin = None  # should be set in `local_conf.py`
 telegram_error = None  # should be set in `local_conf.py`
+telegram_members = None  # should be set in `local_conf.py`
 
 slack_hooks = {  # should be set in `local_conf.py`
     'errors': None,
@@ -12,8 +13,12 @@ slack_hooks = {  # should be set in `local_conf.py`
     'callbacks': None,
 }
 
+chats_slugs = {
+    # -1000000000000: 'slug',  # should be set in `local_conf.py`
+}
+
 chats = {
-    # 'ПЗПІ-20-4': None,  # should be set in `local_conf.py`
+    # 'ПЗПІ-20-4': -1000000000000,  # should be set in `local_conf.py`
 }
 
 threads = {
