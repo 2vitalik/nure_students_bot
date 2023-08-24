@@ -4,7 +4,11 @@ grid-i_pCquwIyF:
     c-glvGyy8QkN: fio_auto
     c-903M4ivXZB: telegram_id
     c-uKVISETOEg: group
-    c-MhoqlRmaEc: telegram_input
+grid-dWTnprd8lC:
+  name: Teachers
+  columns:
+    c-yW-t2udjff: fio_auto
+    c-3FlzFOSRD_: telegram_id
 grid-wxwuVFFBIJ:
   name: TelegramUsers
   columns:
@@ -14,3 +18,19 @@ grid-wxwuVFFBIJ:
     c-xPMWTA-IGd: tg_username
     c-y54Ru4DBmO: tg_chats
     c-UuWePOedom: tg_forums
+grid-VMPay8tI_m:
+  name: TelegramForums
+  columns:
+    c-ZFi2dqHvrl: telegram_id
+    c-CuXX-G06Ky: potok
+grid-2Ce14ylP0F:
+  name: TelegramGroups
+  columns:
+    c-9ejAqLbl-T: telegram_id
+    c-Hz8RpROL3j: group
+    c-TJCqpBNQD_: chat_type
+grid-ubxkuJd_e3:
+  name: TelegramChats
+  columns:
+    c-dOZkXcTvQb: telegram_id
+    c-ReTzvSqZAZ: desc
