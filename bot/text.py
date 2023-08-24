@@ -124,7 +124,7 @@ class TextHandler:
                     is_anonymous=is_anonymous,
                     allows_multiple_answers=allows_multiple,
                     disable_notification=True,
-                    message_thread_id=conf.threads.get(slug),
+                    message_thread_id=conf.poll_threads.get(slug),
                 )
                 poll_id = poll_message.poll.id
                 poll_ids[slug] = poll_id

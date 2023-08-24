@@ -22,7 +22,7 @@ chats = {
     # 'ПЗПІ-20-4': -1000000000000,  # should be set in `local_conf.py`
 }
 
-threads = {
+poll_threads = {
     # 'oop-22': None,  # should be set in `local_conf.py`
 }
 
