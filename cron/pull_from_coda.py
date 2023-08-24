@@ -1,3 +1,5 @@
+import up  # to go to root folder
+
 from tools.coda import coda_doc
 
 
