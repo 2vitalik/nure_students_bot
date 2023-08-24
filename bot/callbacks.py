@@ -8,7 +8,7 @@ from shared_utils.io.json import json_dump
 import conf
 from bot.commands.register import register_message, register_buttons
 from tools.errors import errors
-from tools.tg_utils import tg_send
+from tools.tg import tg_send
 
 
 def save_callback_json(query, callback_type):

@@ -14,7 +14,7 @@ from bot.polls import process_poll, process_poll_answer
 from bot.commands.register import register
 from bot.text import TextHandler
 from bot.members import members
-from bot.utils.errors import errors
+from tools.errors import errors
 
 
 @errors('start_bot')

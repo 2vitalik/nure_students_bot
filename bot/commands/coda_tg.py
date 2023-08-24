@@ -3,7 +3,7 @@ from shared_utils.io.json import json_dump
 
 import conf
 from tools.errors import errors
-from tools.tg_utils import tg_send
+from tools.tg import tg_send
 
 
 command = 'coda_tg'
