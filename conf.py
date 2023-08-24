@@ -1,3 +1,4 @@
+from pathlib import Path
 
 coda_token = None  # should be set in `local_conf.py`
 
@@ -35,7 +36,8 @@ coda_tables = {
     'debug': 'Students',
 }
 
-data_path = 'data'
+root_path = Path(__file__).resolve().parent
+data_path = root_path / 'data'
 
 try:
     from local_conf import *
