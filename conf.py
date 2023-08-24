@@ -1,6 +1,7 @@
 from pathlib import Path
 
 coda_token = None  # should be set in `local_conf.py`
+coda_doc_id = None  # should be set in `local_conf.py`
 
 telegram_token = None  # should be set in `local_conf.py`
 telegram_admin = None  # should be set in `local_conf.py`
@@ -23,7 +24,7 @@ chats = {
 }
 
 poll_threads = {
-    # 'oop-22': None,  # should be set in `local_conf.py`
+    # 'oop-22': 123,  # should be set in `local_conf.py`
 }
 
 coda_docs = {
