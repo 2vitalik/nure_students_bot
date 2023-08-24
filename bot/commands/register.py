@@ -4,8 +4,8 @@ import shared_utils.api.telegram.telegram_utils as tg
 from shared_utils.io.json import json_dump
 
 import conf
-from bot.utils.errors import errors
-from bot.utils.tg_utils import tg_send
+from tools.errors import errors
+from tools.tg_utils import tg_send
 
 
 def register_message(icon, title, user_id, username, user_named, full_name):

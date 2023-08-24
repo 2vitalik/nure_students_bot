@@ -4,7 +4,7 @@ from shared_utils.io.io import append
 from shared_utils.io.json import json_dump, json_dumps
 
 import conf
-from bot.utils.errors import errors
+from tools.errors import errors
 
 
 def get_poll_path(poll_id):

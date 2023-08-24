@@ -10,8 +10,8 @@ from telegram import Bot
 
 import conf
 from bot.polls import get_poll_path
-from bot.utils.errors import errors
-from bot.utils.tg_utils import tg_send
+from tools.errors import errors
+from tools.tg_utils import tg_send
 
 
 bot = Bot(conf.telegram_token)  # todo: move to special common place

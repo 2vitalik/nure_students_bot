@@ -1,7 +1,7 @@
 from telegram import Bot
 
 import conf
-from bot.utils.tg_utils import tg_send
+from tools.tg_utils import tg_send
 
 
 bot = Bot(conf.telegram_token)

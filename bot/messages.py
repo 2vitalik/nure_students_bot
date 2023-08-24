@@ -3,8 +3,8 @@ from datetime import datetime
 from shared_utils.io.json import json_dump
 
 import conf
-from bot.utils.errors import errors
-from bot.utils.tg_utils import tg_send
+from tools.errors import errors
+from tools.tg_utils import tg_send
 
 
 @errors('messages')

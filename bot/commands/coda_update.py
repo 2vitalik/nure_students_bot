@@ -1,8 +1,8 @@
 from shared_utils.api.coda.v2.doc import CodaDoc
 
 import conf
-from bot.utils.errors import errors
-from bot.utils.tg_utils import tg_send
+from tools.errors import errors
+from tools.tg_utils import tg_send
 
 
 command = 'coda_update'
