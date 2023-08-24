@@ -40,6 +40,7 @@ coda_tables = {
 root_path = Path(__file__).resolve().parent
 data_path = root_path / 'data'
 coda_conf_path = data_path / 'coda_conf'
+coda_json_path = data_path / 'coda_json'
 
 try:
     from local_conf import *
