@@ -37,6 +37,9 @@ coda_tables = {
     'debug': 'Students',
 }
 
+email_from = None  # should be set in `local_conf.py`
+email_pass = None  # should be set in `local_conf.py`
+
 root_path = Path(__file__).resolve().parent
 data_path = root_path / 'data'
 coda_conf_path = data_path / 'coda_conf'
