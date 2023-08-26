@@ -25,12 +25,12 @@ def coda_update(update, context):
                 f"Should start from: /{command}")
         return
 
-    coda_doc = text[len(f'/{command} '):].strip()  # todo: implement as decorator?
+    coda_slug = text[len(f'/{command} '):].strip()  # todo: implement as decorator?
 
-    tg_send(bot, chat.id, f'🌀 <code>{coda_doc}</code> — updating...')
+    tg_send(bot, chat.id, f'🌀 <code>{coda_slug}</code> — updating...')
 
-    doc = CodaDoc(conf.coda_docs[coda_doc], coda_token=conf.coda_token,
+    doc = CodaDoc(conf.coda_docs[coda_slug], coda_token=conf.coda_token,
                   conf_path=f'{conf.data_path}/coda_conf')
     doc.update_structure()
 
-    tg_send(bot, chat.id, f'✔️ <code>{coda_doc}</code> — updated')
+    tg_send(bot, chat.id, f'✔️ <code>{coda_slug}</code> — updated')

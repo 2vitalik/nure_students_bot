@@ -7,8 +7,6 @@ from tools.coda import coda_doc
 
 
 def pull_from_coda():
-    path = conf.coda_json_path / f'd{coda_doc.doc_id}'
-
     tables = {
         'students': coda_doc.Students,
         'teachers': coda_doc.Teachers,
@@ -27,7 +25,8 @@ def pull_from_coda():
                 column: row[column]
                 for column in columns
             }
-        json_dump(path / 'tables' / f'{table_slug}.json', rows[table_slug])
+        filename = conf.coda_json_path / 'tables' / f'{table_slug}.json'
+        json_dump(filename, rows[table_slug])
 
 
 if __name__ == '__main__':
