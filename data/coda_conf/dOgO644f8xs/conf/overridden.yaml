@@ -16,21 +16,26 @@ grid-wxwuVFFBIJ:
     c-oNROXtGqUd: tg_first_name
     c-xkXzyctxEP: tg_last_name
     c-xPMWTA-IGd: tg_username
-    c-y54Ru4DBmO: tg_chats
+    c-y54Ru4DBmO: tg_groups
     c-UuWePOedom: tg_forums
+    c-jmD2oYSOvI: tg_chats
+    c-jlhSMA7o1p: timestamp
 grid-VMPay8tI_m:
   name: TelegramForums
   columns:
     c-ZFi2dqHvrl: telegram_id
+    c-Z507PzXgi3: title
     c-CuXX-G06Ky: potok
 grid-2Ce14ylP0F:
   name: TelegramGroups
   columns:
     c-9ejAqLbl-T: telegram_id
+    c-677TMbQj3E: title
     c-Hz8RpROL3j: group
     c-TJCqpBNQD_: chat_type
 grid-ubxkuJd_e3:
   name: TelegramChats
   columns:
     c-dOZkXcTvQb: telegram_id
+    c-2EaCo7iEhj: title
     c-ReTzvSqZAZ: desc
