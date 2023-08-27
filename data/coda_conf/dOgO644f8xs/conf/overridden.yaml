@@ -1,14 +1,28 @@
+grid-dWTnprd8lC:
+  name: Teachers
+  columns:
+    c-yW-t2udjff: fio_auto
+    c-3FlzFOSRD_: telegram_id
 grid-i_pCquwIyF:
   name: Students
   columns:
     c-glvGyy8QkN: fio_auto
     c-903M4ivXZB: telegram_id
     c-uKVISETOEg: group
-grid-dWTnprd8lC:
-  name: Teachers
+grid-R1XK7Mt75X:
+  name: StudentStreams
   columns:
-    c-yW-t2udjff: fio_auto
-    c-3FlzFOSRD_: telegram_id
+    c-fwuCz9FMwE: name
+    c-d4-uZzsF3V: specialty
+    c-LFMqPgc93a: year
+    c-gN-ny1DLD5: kurator
+grid-QGa5z4BrDh:
+  name: StudentGroups
+  columns:
+    c-2zzT74YKPI: name
+    c-L1oJRd8wo2: stream
+    c-BOJ9jHDhev: number
+    c-ME8a1GjEck: kurator
 grid-wxwuVFFBIJ:
   name: TelegramUsers
   columns:
@@ -16,22 +30,28 @@ grid-wxwuVFFBIJ:
     c-oNROXtGqUd: tg_first_name
     c-xkXzyctxEP: tg_last_name
     c-xPMWTA-IGd: tg_username
-    c-y54Ru4DBmO: tg_groups
-    c-UuWePOedom: tg_forums
-    c-jmD2oYSOvI: tg_chats
     c-jlhSMA7o1p: timestamp
     c-_9v3J1sZtB: is_premium
     c-uLa1ZwPLdd: lang_code
+    c-PhqLVtnMcr: tg_chats
+    c-gzDwNk8K_g: tg_chats_ever
+grid-KNm5H4LBqt:
+  name: TelegramChats
+  columns:
+    c-9ejAqLbl-T: telegram_id
+    c-677TMbQj3E: title
+    c-I23G8YZEkW: chat_type
+    c-Dz2jEce9P2: is_forum
 grid-VMPay8tI_m:
-  name: TelegramForums
+  name: TelegramStreamChats
   columns:
     c-ZFi2dqHvrl: telegram_id
     c-Z507PzXgi3: title
-    c-CuXX-G06Ky: potok
+    c-CuXX-G06Ky: stream
     c-Hb3SEgTjwB: is_forum
     c-IfsoEsm81p: chat_type
 grid-2Ce14ylP0F:
-  name: TelegramGroups
+  name: TelegramGroupChats
   columns:
     c-9ejAqLbl-T: telegram_id
     c-677TMbQj3E: title
@@ -40,7 +60,7 @@ grid-2Ce14ylP0F:
     c-Dz2jEce9P2: is_forum
     c-I23G8YZEkW: chat_type
 grid-ubxkuJd_e3:
-  name: TelegramChats
+  name: TelegramOtherChats
   columns:
     c-dOZkXcTvQb: telegram_id
     c-2EaCo7iEhj: title

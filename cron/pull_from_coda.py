@@ -8,12 +8,15 @@ from tools.coda import coda_doc
 
 def pull_from_coda():
     tables = {
-        'students': coda_doc.Students,
         'teachers': coda_doc.Teachers,
+        'students': coda_doc.Students,
+        'streams': coda_doc.StudentStreams,
+        'groups': coda_doc.StudentGroups,
         'tg_users': coda_doc.TelegramUsers,
-        'tg_forums': coda_doc.TelegramForums,
-        'tg_groups': coda_doc.TelegramGroups,
         'tg_chats': coda_doc.TelegramChats,
+        'chats_stream': coda_doc.TelegramStreamChats,
+        'chats_group': coda_doc.TelegramGroupChats,
+        'chats_other': coda_doc.TelegramOtherChats,
     }
     rows = {}
     for table_slug, table in tables.items():
@@ -31,12 +34,12 @@ def pull_from_coda():
 
 def update_tg_jsons():
     files = [
-        'students.json',
         'teachers.json',
-        'tg_chats.json',
-        'tg_forums.json',
-        'tg_groups.json',
+        'students.json',
         'tg_users.json',
+        'chats_stream.json',
+        'chats_group.json',
+        'chats_other.json',
     ]
 
     for file in files:
