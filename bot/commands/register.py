@@ -51,7 +51,7 @@ def register(update, context):
     cmd = update.message.text.strip()
 
     if chat.id != user.id:
-        tg_send(bot, chat.id,
+        tg_send(chat.id,
                 '⚠️ Відправляйте запит на реєстрацію не тут, '
                 'а в особистому чаті з '
                 '<b><a href="https://t.me/nure_students_bot">ботом</a></b>',
@@ -70,11 +70,11 @@ def register(update, context):
     json_dump(filename, update.message.to_dict())
 
     if not cmd.startswith('/register'):
-        tg_send(bot, conf.telegram_error,
+        tg_send(conf.telegram_error,
                 "Register command started not from /register, that's strange\n"
                 f"Command: {cmd}\n"
                 f"User: {user.id}")
-        tg_send(bot, chat.id,
+        tg_send(chat.id,
                 "⚠️ Внутрішня помилка у боті, зверніться, будь ласка, "
                 "до розробника: @vitaliy_lyapota")
         return
@@ -87,15 +87,15 @@ def register(update, context):
                             user.id, user.username, user_named, full_name)
 
     try:
-        tg_send(bot, conf.telegram_admin, text, buttons=register_buttons(data))
+        tg_send(conf.telegram_admin, text, buttons=register_buttons(data))
         # todo: process if too many messages at the same minute...
 
-        tg_send(bot, chat.id, "☑️ Запит на реєстрацію відправлено\n"
+        tg_send(chat.id, "☑️ Запит на реєстрацію відправлено\n"
                               "⏱ Очикуйте підтвердження від викладача")
     except Exception as e:
-        tg_send(bot, chat.id,
+        tg_send(chat.id,
                 "⚠️ Нажаль, сталась якась помилка у роботі бота...\n\n"
                 "Зверніться, будь ласка, до розробника: @vitaliy_lyapota")
-        tg_send(bot, conf.telegram_error,
+        tg_send(conf.telegram_error,
                 "Unexpected error while sending register message:\n"
                 f"{type(e).__name__}: {e}")

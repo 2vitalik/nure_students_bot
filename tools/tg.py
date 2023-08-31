@@ -4,9 +4,13 @@ from datetime import datetime
 import shared_utils.api.telegram.telegram_utils as tg
 from shared_utils.io.io import append
 from shared_utils.io.json import json_dumps, json_dump
+from telegram import Bot
 from telegram.error import TimedOut, RetryAfter
 
 import conf
+
+
+bot = Bot(conf.telegram_token)
 
 
 def get_filename(chat_id, text, folder):
@@ -17,7 +21,7 @@ def get_filename(chat_id, text, folder):
            f'{dt} - {chat_id} - {hash_value}.json'
 
 
-def tg_send(bot, chat_id, text, keyboard=None, buttons=None, silent=False):
+def tg_send(chat_id, text, keyboard=None, buttons=None, silent=False):
     out_filename = get_filename(chat_id, text, 'output')
 
     line = '-' * 79
@@ -49,6 +53,6 @@ def tg_send(bot, chat_id, text, keyboard=None, buttons=None, silent=False):
         #             f'>{add_quote(text)}')
         time.sleep(60)
 
-        message = tg_send(bot, chat_id, text, keyboard, buttons, silent)
+        message = tg_send(chat_id, text, keyboard, buttons, silent)
         append(out_filename, 'DELAYED SENT')
         return message

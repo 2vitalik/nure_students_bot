@@ -14,12 +14,12 @@ def coda_update(update, context):
     chat = update.message.chat
 
     if chat.id != conf.telegram_admin:  # todo: implement as decorator?
-        tg_send(bot, chat.id, '🤷🏻‍♂️ Потрібен адмінський доступ')
+        tg_send(chat.id, '🤷🏻‍♂️ Потрібен адмінський доступ')
         return
 
     text = update.message.text.strip()
     if not text.startswith(f'/{command} '):  # todo: implement as decorator?
-        tg_send(bot, conf.telegram_error,
+        tg_send(conf.telegram_error,
                 f"<b>Error in command</b>\n"
                 f"Your input: {text}\n"
                 f"Should start from: /{command}")
@@ -27,10 +27,10 @@ def coda_update(update, context):
 
     coda_slug = text[len(f'/{command} '):].strip()  # todo: implement as decorator?
 
-    tg_send(bot, chat.id, f'🌀 <code>{coda_slug}</code> — updating...')
+    tg_send(chat.id, f'🌀 <code>{coda_slug}</code> — updating...')
 
     doc = CodaDoc(conf.coda_docs[coda_slug], coda_token=conf.coda_token,
                   conf_path=f'{conf.data_path}/coda_conf')
     doc.update_structure()
 
-    tg_send(bot, chat.id, f'✔️ <code>{coda_slug}</code> — updated')
+    tg_send(chat.id, f'✔️ <code>{coda_slug}</code> — updated')

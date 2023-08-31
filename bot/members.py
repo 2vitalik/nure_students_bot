@@ -50,4 +50,4 @@ def process_case(bot, chat_id, data, action):
         f' <b><a href="tg://user?id={telegram_id}">Link</a></b>\n' \
         f'<b>Nick:</b> @{username}'
 
-    tg_send(bot, conf.telegram_members, message)
+    tg_send(conf.telegram_members, message)

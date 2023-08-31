@@ -66,7 +66,7 @@ def callback_register(bot, query):
     if m:
         user_named = m.group(1)
     else:
-        tg_send(bot, conf.telegram_error,
+        tg_send(conf.telegram_error,
                 f'⛔️ Не вдалося знайти "Input" у повідомлені')
         return
 
@@ -74,7 +74,7 @@ def callback_register(bot, query):
     if m:
         full_name = m.group(1)
     else:
-        tg_send(bot, conf.telegram_error,
+        tg_send(conf.telegram_error,
                 f'⛔️ Не вдалося знайти "Full" у повідомлені')
         return
 
@@ -83,7 +83,7 @@ def callback_register(bot, query):
 
         if already_registered:
             icon, title, hidden = '❎', 'Вже був зареєстрован раніше', True
-            tg_send(bot, user_id,
+            tg_send(user_id,
                     "❎ Здається, ви вже були зареєстровані раніше!\n"
                     "Можливо, ви відправили запит повторно\n\n"
                     "Якщо це не так, тоді звʼяжіться, будь ласка, "
@@ -91,22 +91,22 @@ def callback_register(bot, query):
 
         elif registered:
             icon, title, hidden = '✅', 'Зареєстровано автоматично', True
-            tg_send(bot, user_id,
+            tg_send(user_id,
                     "✅ Дякую, Ви були успішно зареєстровані :)")
 
         else:
             icon, title, hidden = '⛔️', 'Не вдалося автоматично', False
-            tg_send(bot, conf.telegram_error,
+            tg_send(conf.telegram_error,
                     f'⛔️ Не вдалося знайти: @{username}')
 
     elif cmd == 'manually':
         icon, title, hidden = '✅', 'Зареєстровано власноруч', True
-        tg_send(bot, user_id,
+        tg_send(user_id,
                 "✅ Дякую, Ви були успішно зареєстровані!")
 
     elif cmd == 'duplicated':
         icon, title, hidden = '❎', 'Це повтор', True
-        tg_send(bot, user_id,
+        tg_send(user_id,
                 "❎ Здається, ви вже були зареєстровані раніше\n"
                 "Можливо, ви відправили запит повторно\n\n"
                 "Якщо це не так, тоді звʼяжіться, будь ласка, "
@@ -122,7 +122,7 @@ def callback_register(bot, query):
         icon, title, hidden = '🔆', 'Знову показано', False
 
     else:
-        tg_send(bot, conf.telegram_error,
+        tg_send(conf.telegram_error,
                 "Register callback has wrong command information\n"
                 f"Query Data: {query.data}")
         return
