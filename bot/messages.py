@@ -12,7 +12,7 @@ def messages(update, context):
     now = datetime.now()
     month, dt = now.strftime('%Y-%m'), now.strftime('%Y-%m-%d %H-%M-%S')
 
-    message = update.message
+    message = update.message or update.edit_message
 
     chat_id = message.chat_id
     user_id = message.from_user.id
