@@ -7,7 +7,9 @@ from tools.coda import coda_tables
 from tools.data import sorted_by_keys
 
 
-def pull_from_coda(table_slug, coda_table):
+def pull_from_coda(table_slug):
+    coda_table = coda_tables[table_slug]
+
     rows = {}
     for row in coda_table.all():
         row_id = row['@id']
@@ -22,11 +24,12 @@ def pull_from_coda(table_slug, coda_table):
 
 
 def pull_all_from_coda():
-    for table_slug, coda_table in coda_tables.items():
-        pull_from_coda(table_slug, coda_table)
+    for table_slug in coda_tables:
+        pull_from_coda(table_slug)
 
 
-def update_tg_json(filename):
+def update_tg_json(table_slug):
+    filename = f'{table_slug}.json'
     coda_table = json_load(conf.coda_json_path / 'tables' / filename)
 
     tg_json = {}
@@ -49,21 +52,22 @@ def update_tg_json(filename):
 
 
 def update_all_tg_jsons():
-    filenames = [
-        'teachers.json',
-        'students.json',
-        'tg_users.json',
-        'tg_chats.json',
-        'chats_stream.json',
-        'chats_group.json',
-        'chats_other.json',
+    table_slugs = [
+        'teachers',
+        'students',
+        'tg_users',
+        'tg_chats',
+        'chats_stream',
+        'chats_group',
+        'chats_other',
     ]
 
-    for filename in filenames:
-        update_tg_json(filename)
+    for table_slug in table_slugs:
+        update_tg_json(table_slug)
 
 
-def sync_row_ids(filename):
+def sync_row_ids(table_slug):
+    filename = f'{table_slug}.json'
     coda_json = json_load(conf.coda_json_path / 'tg_jsons' / filename)
     data_json = json_load(conf.data_path / 'tg_jsons' / filename)
 
@@ -91,13 +95,13 @@ def sync_row_ids(filename):
 
 
 def sync_all_row_ids():
-    filenames = [
-        'tg_users.json',
-        'tg_chats.json',
+    table_slugs = [
+        'tg_users',
+        'tg_chats',
     ]
 
-    for filename in filenames:
-        sync_row_ids(filename)
+    for table_slug in table_slugs:
+        sync_row_ids(table_slug)
 
 
 if __name__ == '__main__':
