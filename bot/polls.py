@@ -18,8 +18,8 @@ def process_poll(update, context):
     poll = update.poll
     path = get_poll_path(poll.id)
 
-    print(json_dumps(poll.to_dict()))
-    print()
+    # print(json_dumps(poll.to_dict()))
+    # print()
 
     dt = datetime.now().strftime('%Y-%m-%d %H-%M-%S')
 
@@ -33,8 +33,8 @@ def process_poll_answer(update, context):
     poll = update.poll_answer
     path = get_poll_path(poll.poll_id)
 
-    print(json_dumps(poll.to_dict()))
-    print()
+    # print(json_dumps(poll.to_dict()))
+    # print()
 
     dt = datetime.now().strftime('%Y-%m-%d %H-%M-%S')
     user = poll.user.id
