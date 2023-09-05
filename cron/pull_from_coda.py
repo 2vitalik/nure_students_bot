@@ -75,7 +75,7 @@ def update_all_tg_jsons():
         update_tg_json(filename)
 
 
-def compare_tg_json(filename):
+def sync_row_ids(filename):
     coda_json = json_load(conf.coda_json_path / 'tg_jsons' / filename)
     data_json = json_load(conf.data_path / 'tg_jsons' / filename)
 
@@ -102,14 +102,14 @@ def compare_tg_json(filename):
                   sorted_by_keys(data_json))
 
 
-def compare_tg_jsons():
+def sync_all_row_ids():
     filenames = [
         'tg_users.json',
         'tg_chats.json',
     ]
 
     for filename in filenames:
-        compare_tg_json(filename)
+        sync_row_ids(filename)
 
 
 if __name__ == '__main__':
