@@ -14,11 +14,12 @@ def messages(update, context):
     now = datetime.now()
     month, dt = now.strftime('%Y-%m'), now.strftime('%Y-%m-%d_%H-%M-%S')
 
-    message = update.message or update.edited_message
-
-    chat_id = message.chat_id
-    user_id = message.from_user.id
     update_id = update.update_id
+    chat = update.effective_chat
+    user = update.effective_user
+    chat_id = chat.id if chat else 0
+    user_id = user.id if user else 0
+    message = update.effective_message or {}
 
     if chat_id == user_id:
         folder = 'bot'
