@@ -1,6 +1,6 @@
 import logging
 
-from telegram import Bot
+from telegram import Bot, Update
 from telegram.ext import Updater, MessageHandler, Filters, CommandHandler, \
     PollHandler, PollAnswerHandler, CallbackQueryHandler
 from shared_utils.conf import conf as shared_conf
@@ -56,7 +56,7 @@ def start_bot():
     # callbacks:
     d.add_handler(CallbackQueryHandler(callbacks))
 
-    updater.start_polling()
+    updater.start_polling(allowed_updates=Update.ALL_TYPES)
     print('Bot has successfully started.')
     updater.idle()
     print('Bot has stopped.')
