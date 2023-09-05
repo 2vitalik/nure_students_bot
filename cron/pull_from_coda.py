@@ -55,7 +55,8 @@ def update_tg_jsons():
             if not tg_id:
                 continue
             if tg_id in tg_json:
-                raise Exception('123')
+                raise Exception(f'Error: Duplicated `tg_id`: {tg_id} '
+                                f'for the file: {file}')
 
             tg_data = {'row_id': row_id, **coda_row}
             del tg_data['telegram_id']
