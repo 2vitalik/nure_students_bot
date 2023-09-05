@@ -5,6 +5,7 @@ from shared_utils.io.json import json_dump, json_dumps
 
 import conf
 from tools.errors import errors
+from tools.save_update import save_update
 
 
 def get_poll_path(poll_id):
@@ -12,6 +13,7 @@ def get_poll_path(poll_id):
 
 
 @errors('process_poll')
+@save_update
 def process_poll(update, context):
     poll = update.poll
     path = get_poll_path(poll.id)
@@ -26,6 +28,7 @@ def process_poll(update, context):
 
 
 @errors('process_poll_answer')
+@save_update
 def process_poll_answer(update, context):
     poll = update.poll_answer
     path = get_poll_path(poll.poll_id)

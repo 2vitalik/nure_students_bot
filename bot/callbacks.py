@@ -8,6 +8,7 @@ from shared_utils.io.json import json_dump
 import conf
 from bot.commands.register import register_message, register_buttons
 from tools.errors import errors
+from tools.save_update import save_update
 from tools.tg import tg_send
 
 
@@ -20,6 +21,7 @@ def save_callback_json(query, callback_type):
 
 
 @errors('callbacks')
+@save_update
 def callbacks(update, context):
     bot = context.bot
     query = update.callback_query

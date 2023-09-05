@@ -5,10 +5,12 @@ from shared_utils.io.json import json_dump
 
 import conf
 from tools.errors import errors
+from tools.save_update import save_update
 from tools.tg import tg_send
 
 
 @errors('members')
+@save_update
 def members(update, context):
     append(join(conf.data_path, 'members.txt'), update.to_json())
 

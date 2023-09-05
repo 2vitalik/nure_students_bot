@@ -3,21 +3,16 @@ from datetime import datetime
 from shared_utils.io.json import json_dump
 
 import conf
+from tools.save_update import save_update
 from tools.errors import errors
 from tools.tg import tg_send
 
 
 @errors('messages')
+@save_update
 def messages(update, context):
     now = datetime.now()
     month, dt = now.strftime('%Y-%m'), now.strftime('%Y-%m-%d_%H-%M-%S')
-
-    update_id = str(update['update_id'])
-    sub_folder = update_id[:-3]
-
-    filename = f'{conf.data_path}/updates/queue.todo/{sub_folder}/' \
-               f'{update_id}__{dt}.json'
-    json_dump(filename, update.to_dict())
 
     message = update.message or update.edited_message
 

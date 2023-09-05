@@ -1,10 +1,10 @@
 from datetime import datetime
 
-import shared_utils.api.telegram.telegram_utils as tg
 from shared_utils.io.json import json_dump
 
 import conf
 from tools.errors import errors
+from tools.save_update import save_update
 from tools.tg import tg_send
 
 
@@ -43,6 +43,7 @@ def register_buttons(data, hidden=False):
 
 
 @errors('register')
+@save_update
 def register(update, context):
     bot = context.bot
     chat = update.message.chat

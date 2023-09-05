@@ -2,6 +2,7 @@ from shared_utils.api.coda.v2.doc import CodaDoc
 
 import conf
 from tools.errors import errors
+from tools.save_update import save_update
 from tools.tg import tg_send
 
 
@@ -9,6 +10,7 @@ command = 'coda_update'
 
 
 @errors(command)
+@save_update
 def coda_update(update, context):
     bot = context.bot
     chat = update.message.chat
