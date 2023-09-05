@@ -75,6 +75,43 @@ def update_all_tg_jsons():
         update_tg_json(filename)
 
 
+def compare_tg_json(filename):
+    coda_json = json_load(conf.coda_json_path / 'tg_jsons' / filename)
+    data_json = json_load(conf.data_path / 'tg_jsons' / filename)
+
+    changed = False
+    for tg_id, coda_data in coda_json.items():
+        if tg_id not in data_json:
+            # todo: add this data to json in this case? (and send notification)
+            raise Exception(f'Data was manually added in Coda? '
+                            f'`tg_id` is {tg_id}, file: "{filename}"')
+
+        row_id = coda_data['row_id']
+
+        data = data_json[tg_id]
+        if 'row_id' not in data:
+            data['row_id'] = row_id
+            changed = True
+        else:
+            if data['row_id'] != row_id:
+                raise Exception(f'Different `raw_id` in coda and tg_json: '
+                                f'coda: "{row_id}", json: "{data["row_id"]}"')
+
+    if changed:
+        json_dump(conf.data_path / 'tg_jsons' / filename,
+                  sorted_by_keys(data_json))
+
+
+def compare_tg_jsons():
+    filenames = [
+        'tg_users.json',
+        'tg_chats.json',
+    ]
+
+    for filename in filenames:
+        compare_tg_json(filename)
+
+
 if __name__ == '__main__':
     pull_from_coda()
     update_tg_jsons()
