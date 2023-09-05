@@ -4,6 +4,7 @@ from shared_utils.io.json import json_load, json_dump
 
 import conf
 from tools.coda import coda_doc
+from tools.data import sorted_by_keys
 
 
 def pull_from_coda():
@@ -18,18 +19,19 @@ def pull_from_coda():
         'chats_group': coda_doc.TelegramGroupChats,
         'chats_other': coda_doc.TelegramOtherChats,
     }
-    rows = {}
+
     for table_slug, table in tables.items():
-        rows[table_slug] = {}
+        rows = {}
         for row in table.all():
             row_id = row['@id']
             columns = table.overridden.values()
-            rows[table_slug][row_id] = {
+            rows[row_id] = {
                 column: row[column]
                 for column in columns
             }
+
         filename = conf.coda_json_path / 'tables' / f'{table_slug}.json'
-        json_dump(filename, rows[table_slug])
+        json_dump(filename, sorted_by_keys(rows))
 
 
 def update_tg_jsons():
