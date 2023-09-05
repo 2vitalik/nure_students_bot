@@ -22,21 +22,21 @@ def members(update, context):
     chat_id = message['chat']['id']
 
     if 'new_chat_members' in message:
-        for data in message['new_chat_members']:
-            process_case(context.bot, chat_id, data, 'new')
+        for user in message['new_chat_members']:
+            process_case(context.bot, chat_id, user, 'new')
 
     if 'left_chat_member' in message:
-        data = message['left_chat_member']
-        process_case(context.bot, chat_id, data, 'left')
+        user = message['left_chat_member']
+        process_case(context.bot, chat_id, user, 'left')
 
 
-def process_case(bot, chat_id, data, action):
+def process_case(bot, chat_id, user, action):
     chat_slug = conf.chats_slugs.get(chat_id, chat_id)
 
-    telegram_id = data['id']
-    first_name = data['first_name']
-    username = data.get('username', '')
-    last_name = data.get('last_name', '')
+    telegram_id = user['id']
+    first_name = user['first_name']
+    username = user.get('username', '')
+    last_name = user.get('last_name', '')
 
     if action == 'new':
         message = f'➕ Joined to: <code>{chat_slug}</code>\n\n'
