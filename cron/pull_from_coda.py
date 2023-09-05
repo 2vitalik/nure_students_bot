@@ -3,7 +3,7 @@ import up  # to go to root folder
 from shared_utils.io.json import json_load, json_dump
 
 import conf
-from tools.coda import coda_doc
+from tools.coda import coda_tables
 from tools.data import sorted_by_keys
 
 
@@ -22,19 +22,7 @@ def pull_from_coda(table_slug, coda_table):
 
 
 def pull_all_from_coda():
-    tables = {
-        'teachers': coda_doc.Teachers,
-        'students': coda_doc.Students,
-        'streams': coda_doc.StudentStreams,
-        'groups': coda_doc.StudentGroups,
-        'tg_users': coda_doc.TelegramUsers,
-        'tg_chats': coda_doc.TelegramChats,
-        'chats_stream': coda_doc.TelegramStreamChats,
-        'chats_group': coda_doc.TelegramGroupChats,
-        'chats_other': coda_doc.TelegramOtherChats,
-    }
-
-    for table_slug, coda_table in tables.items():
+    for table_slug, coda_table in coda_tables.items():
         pull_from_coda(table_slug, coda_table)
 
 
