@@ -18,14 +18,13 @@ def messages(update, context):
     user_id = message.from_user.id
     update_id = update.update_id
 
-    def get_filename(folder):
-        return f'{conf.data_path}/messages/input/all/{folder}/{month}/' \
+    if chat_id == user_id:
+        folder = 'bot'
+        tg_send(chat_id,
+                '🤷🏻‍♂️ Інтерфейс взаємодії з ботом поки що не реалізован')
+    else:
+        folder = 'group'
+
+    filename = f'{conf.data_path}/messages/input/all/{folder}/{month}/' \
                f'{chat_id}/{dt} - {user_id} - {update_id}.json'
-
-    if chat_id != user_id:
-        json_dump(get_filename('group'), message.to_dict())
-        return
-
-    json_dump(get_filename('bot'), message.to_dict())
-
-    tg_send(chat_id, '🤷🏻‍♂️ Інтерфейс взаємодії з ботом поки що не реалізован')
+    json_dump(filename, message.to_dict())
