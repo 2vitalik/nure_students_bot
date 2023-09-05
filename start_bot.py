@@ -2,7 +2,7 @@ import logging
 
 from telegram import Bot, Update
 from telegram.ext import Updater, MessageHandler, Filters, CommandHandler, \
-    PollHandler, PollAnswerHandler, CallbackQueryHandler
+    PollHandler, PollAnswerHandler, CallbackQueryHandler, ChatMemberHandler
 from shared_utils.conf import conf as shared_conf
 
 import conf
@@ -52,6 +52,7 @@ def start_bot():
 
     # all messages:
     d.add_handler(MessageHandler(Filters.all, messages))
+    d.add_handler(ChatMemberHandler(messages, chat_member_types=1))
 
     # callbacks:
     d.add_handler(CallbackQueryHandler(callbacks))
