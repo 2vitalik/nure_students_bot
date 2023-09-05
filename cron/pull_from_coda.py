@@ -104,6 +104,12 @@ def sync_all_row_ids():
         sync_row_ids(table_slug)
 
 
+def pull_and_sync(table_slug):
+    pull_from_coda(table_slug)
+    update_tg_json(table_slug)
+    sync_row_ids(table_slug)
+
+
 if __name__ == '__main__':
     pull_from_coda()
     update_tg_jsons()
