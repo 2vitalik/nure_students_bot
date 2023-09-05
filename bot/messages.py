@@ -16,11 +16,11 @@ def messages(update, context):
 
     chat_id = message.chat_id
     user_id = message.from_user.id
-    hash_value = str(abs(hash(message.to_json())))[:7]
+    update_id = update.update_id
 
     def get_filename(folder):
         return f'{conf.data_path}/messages/input/all/{folder}/{month}/' \
-               f'{chat_id}/{dt} - {user_id} - h{hash_value}.json'
+               f'{chat_id}/{dt} - {user_id} - {update_id}.json'
 
     if chat_id != user_id:
         json_dump(get_filename('group'), message.to_dict())
