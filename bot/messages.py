@@ -19,7 +19,6 @@ def messages(update, context):
     user = update.effective_user
     chat_id = chat.id if chat else 0
     user_id = user.id if user else 0
-    message = update.effective_message or {}
 
     if chat_id == user_id:
         folder = 'bot'
@@ -30,4 +29,4 @@ def messages(update, context):
 
     filename = f'{conf.data_path}/messages/input/all/{folder}/{month}/' \
                f'{chat_id}/{dt} - {user_id} - {update_id}.json'
-    json_dump(filename, message.to_dict())
+    json_dump(filename, update.to_dict())
