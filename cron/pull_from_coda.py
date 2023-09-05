@@ -1,3 +1,5 @@
+import time
+
 import up  # to go to root folder
 
 from shared_utils.io.json import json_load, json_dump
@@ -114,6 +116,16 @@ def pull_and_sync(table_slug):
     pull_from_coda(table_slug)
     update_tg_json(table_slug)
     return sync_row_ids(table_slug)
+
+
+def try_pull_and_sync(table_slug):
+    for delta in [1, 5, 10, 30, 60]:
+        print(f'try_pull_and_sync: Pause for {delta} seconds')
+        time.sleep(delta)
+        if pull_and_sync(table_slug):
+            return True
+
+    raise Exception('Still absent some added entries in `coda`?')
 
 
 if __name__ == '__main__':
