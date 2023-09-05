@@ -93,6 +93,12 @@ def sync_row_ids(table_slug):
         json_dump(conf.data_path / 'tg_jsons' / filename,
                   sorted_by_keys(data_json))
 
+    for tg_id, data in data_json.items():
+        if 'row_id' not in data:
+            return False
+
+    return True
+
 
 def sync_all_row_ids():
     table_slugs = [
@@ -107,7 +113,7 @@ def sync_all_row_ids():
 def pull_and_sync(table_slug):
     pull_from_coda(table_slug)
     update_tg_json(table_slug)
-    sync_row_ids(table_slug)
+    return sync_row_ids(table_slug)
 
 
 if __name__ == '__main__':
