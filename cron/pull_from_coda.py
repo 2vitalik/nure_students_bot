@@ -39,6 +39,7 @@ def update_tg_jsons():
         'teachers.json',
         'students.json',
         'tg_users.json',
+        'tg_chats.json',
         'chats_stream.json',
         'chats_group.json',
         'chats_other.json',
@@ -50,6 +51,7 @@ def update_tg_jsons():
         tg_json = {}
         for row_id, coda_row in coda_table.items():
             tg_id = coda_row['telegram_id']
+            tg_id_str = str(tg_id)
             if not tg_id:
                 continue
             if tg_id in tg_json:
@@ -58,9 +60,10 @@ def update_tg_jsons():
             tg_data = {'row_id': row_id, **coda_row}
             del tg_data['telegram_id']
 
-            tg_json[tg_id] = tg_data
+            tg_json[tg_id_str] = tg_data
 
-        json_dump(conf.coda_json_path / 'tg_jsons' / file, tg_json)
+        filename = conf.coda_json_path / 'tg_jsons' / file
+        json_dump(filename, sorted_by_keys(tg_json))
 
 
 if __name__ == '__main__':
