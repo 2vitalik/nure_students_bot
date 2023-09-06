@@ -42,11 +42,11 @@ email_pass = None  # should be set in `local_conf.py`
 
 root_path = Path(__file__).resolve().parent
 data_path = root_path / 'data'
-coda_conf_path = data_path / 'coda_conf'
 
 try:
     from local_conf import *
 except ImportError:
     pass
 
+coda_conf_path = data_path / 'coda_conf'
 coda_json_path = data_path / 'coda_json' / f'{coda_doc_id}'
