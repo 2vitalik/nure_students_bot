@@ -119,7 +119,7 @@ def pull_and_sync(table_slug):
 
 
 def try_pull_and_sync(table_slug):
-    for delta in [1, 5, 10, 30, 60]:
+    for delta in [1, 2, 4, 8, 16, 32]:
         print(f'try_pull_and_sync: Pause for {delta} seconds')
         time.sleep(delta)
         if pull_and_sync(table_slug):
