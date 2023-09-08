@@ -76,22 +76,24 @@ def sync_row_ids(table_slug):
 
     changed = False
     for tg_id, coda_data in coda_json.items():
+        row_id = coda_data['row_id']
+
         if tg_id not in data_json:
             data_json[tg_id] = coda_data
             slack_updates(f':keycap_star: {tg_id}')
             changed = True
-            continue
 
-        row_id = coda_data['row_id']
-
-        data = data_json[tg_id]
-        if 'row_id' not in data:
-            data['row_id'] = row_id
-            changed = True
         else:
-            if data['row_id'] != row_id:
-                raise Exception(f'Different `raw_id` in coda and tg_json: '
-                                f'coda: "{row_id}", json: "{data["row_id"]}"')
+            data = data_json[tg_id]
+            if 'row_id' not in data:
+                data['row_id'] = row_id
+                slack_updates(f':hash: {tg_id}')
+                changed = True
+            else:
+                old_row_id = data['row_id']
+                if old_row_id != row_id:
+                    raise Exception(f'Different `raw_id` in coda and tg_json: '
+                                    f'coda: "{row_id}", data: "{old_row_id}"')
 
     if changed:
         json_dump(conf.data_path / 'tg_jsons' / filename,
