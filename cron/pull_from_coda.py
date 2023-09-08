@@ -7,6 +7,7 @@ from shared_utils.io.json import json_load, json_dump
 import conf
 from tools.coda import coda_tables
 from tools.data import sorted_by_keys
+from tools.slack import slack_updates
 
 
 def pull_from_coda(table_slug):
@@ -76,9 +77,10 @@ def sync_row_ids(table_slug):
     changed = False
     for tg_id, coda_data in coda_json.items():
         if tg_id not in data_json:
-            # todo: add this data to json in this case? (and send notification)
-            raise Exception(f'Data was manually added in Coda? '
-                            f'`tg_id` is {tg_id}, file: "{filename}"')
+            data_json[tg_id] = coda_data
+            slack_updates(f':keycap_star: {tg_id}')
+            changed = True
+            continue
 
         row_id = coda_data['row_id']
 
