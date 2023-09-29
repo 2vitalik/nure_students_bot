@@ -13,11 +13,12 @@ def add_quote(text):
     return text.replace('\n', '\n> ')
 
 
-def tg_send(chat_id, text):
+def tg_send(chat_id, text, thread_id=None):  # todo: remove...
     try:
         bot.send_message(chat_id, text,
                          parse_mode=ParseMode.HTML,
-                         disable_web_page_preview=True)
+                         disable_web_page_preview=True,
+                         message_thread_id=thread_id)
     except (TimedOut, RetryAfter) as e:
         # todo:
         # slack_error(f'`tg_send`  *{type(e).__name__}*: {str(e)}\n\n'

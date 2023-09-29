@@ -74,10 +74,10 @@ class TextHandler:
             self.send('⚠️ Помилка в параметрах')
             return
 
-        for group, chat_id in conf.chats.items():
-            if group in chats:
-                print(group)
-                tg_send(chat_id, text)
+        for slug, chat_id in conf.chats.items():
+            if slug in chats:
+                print(slug)
+                tg_send(chat_id, text, conf.poll_threads.get(slug))
         self.send('✔️ Текст відправлено')
 
     @basic_handler
