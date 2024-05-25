@@ -38,7 +38,7 @@ def coda_register(username, user_id):
     if not username:
         return False, False
 
-    doc = CodaDoc('d1GDyxjRqoL', coda_token=conf.coda_token,
+    doc = CodaDoc('dGBWPSQDIDf', coda_token=conf.coda_token,
                   conf_path=f'{conf.data_path}/coda_conf')
     students = doc.Students.all()
 

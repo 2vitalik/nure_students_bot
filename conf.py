@@ -29,11 +29,13 @@ poll_threads = {
 
 coda_docs = {
     'oop-22': 'd1GDyxjRqoL',
+    'oop-23': 'dGBWPSQDIDf',
     'debug': 'd1GDyxjRqoL',
 }
 
 coda_tables = {
     'oop-22': 'Students',
+    'oop-23': 'Students',
     'debug': 'Students',
 }
 
