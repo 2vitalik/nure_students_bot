@@ -142,7 +142,9 @@ def callback_register(bot, query):
         else:
             icon, title, hidden = '⛔️', 'Не вдалося автоматично', False
             tg_send(conf.telegram_error,
-                    f'⛔️ Не вдалося знайти: @{username}')
+                    f'⛔️ Немає в табличці: \n'
+                    f'▪️ "{user_named}"\n'
+                    f'▪️ @{username}')
 
     elif cmd == 'manually':
         icon, title, hidden = '✅', 'Зареєстровано власноруч', True
