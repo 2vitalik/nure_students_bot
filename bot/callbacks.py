@@ -35,7 +35,7 @@ def callbacks(update, context):
 
 
 def simplify(name):
-    return name.strip()
+    return name.strip().lower().replace('`', 'ʼ').replace("'", 'ʼ').replace('&#x27;', 'ʼ')
 
 
 def coda_register(user_named, username, user_id):
