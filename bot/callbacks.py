@@ -34,7 +34,11 @@ def callbacks(update, context):
         save_callback_json(query, 'unknown')
 
 
-def coda_register(username, user_id):
+def simplify(name):
+    return name.strip()
+
+
+def coda_register(user_named, username, user_id):
     if not username:
         return False, False
 
@@ -42,9 +46,30 @@ def coda_register(username, user_id):
                   conf_path=f'{conf.data_path}/coda_conf')
     students = doc.Students.all()
 
+    parts = user_named.split()
+
+    first_name = last_name = patronymic = ''
+    if len(parts) == 3:
+        last_name, first_name, patronymic = parts
+    elif len(parts) == 2:
+        last_name, first_name = parts
+    # elif len(parts) == 1:
+    #     last_name = parts[0]
+
+    last_name = simplify(last_name)
+    first_name = simplify(first_name)
+
     registered = already_registered = False
+
     for row in students:
-        if row['tg_username'] == f'@{username}':
+        coda_last_name = simplify(row['last_name'])
+        coda_first_name = simplify(row['first_name'])
+        found = (
+            row['tg_username'] == f'@{username}' or
+            coda_last_name == last_name and coda_first_name == first_name or
+            coda_last_name == first_name and coda_first_name == last_name
+        )
+        if found:
             if row['tg_id']:
                 already_registered = True
                 break
@@ -98,7 +123,8 @@ def callback_register(bot, query):
         return
 
     if cmd == 'process':
-        registered, already_registered = coda_register(username, user_id)
+        registered, already_registered = (
+            coda_register(user_named, username, user_id))
 
         if already_registered:
             icon, title, hidden = '❎', 'Вже був зареєстрован раніше', True
