@@ -73,7 +73,10 @@ def coda_register(user_named, username, user_id):
             if row['tg_id']:
                 already_registered = True
                 break
-            doc.Students.update(row['@id'], {'tg_id': user_id})
+            doc.Students.update(row['@id'], {
+                'tg_id': user_id,
+                'tg_username': f'@{username}',
+            })
             registered = True
             break
 
