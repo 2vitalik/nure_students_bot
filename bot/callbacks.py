@@ -59,8 +59,9 @@ def callback_register(bot, query):
     chat = query.message.chat
     user = query.from_user
 
-    cmd, user_id, username = query.data[len('register:'):].split('|')
-    data = '|'.join((user_id, username))
+    # cmd, user_id, username = query.data[len('register:'):].split('|')
+    cmd = query.data[len('register:'):]
+    # data = '|'.join((user_id, username))
 
     text = query.message.text_html
 
@@ -78,6 +79,22 @@ def callback_register(bot, query):
     else:
         tg_send(conf.telegram_error,
                 f'⛔️ Не вдалося знайти "Full" у повідомлені')
+        return
+
+    m = re.search(r'<b>ID:</b> <code>(.*)</code>,', text)
+    if m:
+        user_id = m.group(1)
+    else:
+        tg_send(conf.telegram_error,
+                f'⛔️ Не вдалося знайти "ID" у повідомлені')
+        return
+
+    m = re.search(r'<b>Nick:</b> @(.*)', text)
+    if m:
+        username = m.group(1)
+    else:
+        tg_send(conf.telegram_error,
+                f'⛔️ Не вдалося знайти "ID" у повідомлені')
         return
 
     if cmd == 'process':
@@ -132,4 +149,4 @@ def callback_register(bot, query):
     text = register_message(icon, title,
                             user_id, username, user_named, full_name)
 
-    tg.callback(query, text, register_buttons(data, hidden=hidden))
+    tg.callback(query, text, register_buttons(hidden=hidden))

@@ -19,25 +19,25 @@ def register_message(icon, title, user_id, username, user_named, full_name):
     )
 
 
-def register_buttons(data, hidden=False):
+def register_buttons(hidden=False):
     if hidden:
         return [
             [
-                ('Повернути опції реєстрації', f'register:show|{data}'),
+                ('Повернути опції реєстрації', f'register:show'),
             ],
         ]
 
     return [
         [
-            ('✅ Зареєструвати', f'register:process|{data}'),
-            ('✅ Власноруч', f'register:manually|{data}'),
+            ('✅ Зареєструвати', f'register:process'),
+            ('✅ Власноруч', f'register:manually'),
         ],
         [
-            ('✔️ Зареєстровано', f'register:already|{data}'),
-            ('❎ Це повтор', f'register:duplicated|{data}'),
+            ('✔️ Зареєстровано', f'register:already'),
+            ('❎ Це повтор', f'register:duplicated'),
         ],
         [
-            ('Приховати опції реєстрації', f'register:hide|{data}'),
+            ('Приховати опції реєстрації', f'register:hide'),
         ]
     ]
 
@@ -82,13 +82,14 @@ def register(update, context):
 
     user_named = cmd[len('/register '):].strip()
     full_name = user.full_name
-    data = f'{user.id}|{user.username}'
+    # data = f'{user.id}|{user.username}|{user_named}'  # fixme: remove unsuccessful attempt
+    # print(data)
 
     text = register_message('⭐️', 'Запит на реєстрацію',
                             user.id, user.username, user_named, full_name)
 
     try:
-        tg_send(conf.telegram_admin, text, buttons=register_buttons(data))
+        tg_send(conf.telegram_admin, text, buttons=register_buttons())
         # todo: process if too many messages at the same minute...
 
         tg_send(chat.id, "☑️ Запит на реєстрацію відправлено\n"
