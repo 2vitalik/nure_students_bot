@@ -31,6 +31,7 @@ coda_docs = {
     'oop-22': 'd1GDyxjRqoL',
     'oop-23': 'dGBWPSQDIDf',
     'debug': 'd1GDyxjRqoL',
+    'python-24': 'd-Z4YDpzcFf',
 }
 
 coda_tables = {
