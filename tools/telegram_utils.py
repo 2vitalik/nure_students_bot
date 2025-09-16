@@ -51,7 +51,7 @@ def telegram_send(bot, chat_id, text, keyboard=None, buttons=None, silent=False)
         )
     except BadRequest as e:
         if 'Chat not found' in str(e):
-            raise ChatNotFoundError(e) from e
+            raise ChatNotFoundError(str(e)) from e
         raise
 
 
@@ -71,9 +71,9 @@ def edit(bot, chat_id, message_id, text, buttons=None):
         )
     except BadRequest as e:
         if 'Chat not found' in str(e):
-            raise ChatNotFoundError(e) from e
+            raise ChatNotFoundError(str(e)) from e
         if 'Message is not modified' in str(e):
-            raise MessageNotModifiedError(e) from e
+            raise MessageNotModifiedError(str(e)) from e
         raise
 
 
