@@ -86,6 +86,7 @@ def coda_register(user_named, username, user_id):
 def callback_register(bot, query):
     chat = query.message.chat
     user = query.from_user
+    msg_id = query.message.message_id
 
     # cmd, user_id, username = query.data[len('register:'):].split('|')
     cmd = query.data[len('register:'):]
@@ -102,7 +103,8 @@ def callback_register(bot, query):
         user_named = m.group(1)
     else:
         tg_send(conf.telegram_admin,
-                f'❌ Не вдалося знайти "Input" у повідомлені')
+                f'❌ Не вдалося знайти "Input" у повідомлені',
+                reply_to=msg_id)
         return
 
     m = re.search(r'<b>Full:</b> (.*)', text)
@@ -110,7 +112,8 @@ def callback_register(bot, query):
         full_name = m.group(1)
     else:
         tg_send(conf.telegram_admin,
-                f'❌ Не вдалося знайти "Full" у повідомлені')
+                f'❌ Не вдалося знайти "Full" у повідомлені',
+                reply_to=msg_id)
         return
 
     m = re.search(r'<b>ID:</b> <code>(.*)</code>,', text)
@@ -118,7 +121,8 @@ def callback_register(bot, query):
         user_id = m.group(1)
     else:
         tg_send(conf.telegram_admin,
-                f'❌ Не вдалося знайти "ID" у повідомлені')
+                f'❌ Не вдалося знайти "ID" у повідомлені',
+                reply_to=msg_id)
         return
 
     m = re.search(r'<b>Nick:</b> @(.*)', text)
@@ -126,7 +130,8 @@ def callback_register(bot, query):
         username = m.group(1)
     else:
         tg_send(conf.telegram_admin,
-                f'❌ Не вдалося знайти "ID" у повідомлені')
+                f'❌ Не вдалося знайти "ID" у повідомлені',
+                reply_to=msg_id)
         return
 
     if cmd == 'process':
@@ -151,7 +156,8 @@ def callback_register(bot, query):
             tg_send(conf.telegram_admin,
                     f'🚫 Немає в табличці: \n'
                     f'▪️ "{user_named}"\n'
-                    f'▪️ @{username}')
+                    f'▪️ @{username}',
+                    reply_to=msg_id)
 
     elif cmd == 'manually':
         icon, title, hidden = '✔️', 'Зареєстровано власноруч', True
@@ -178,7 +184,8 @@ def callback_register(bot, query):
     else:
         tg_send(conf.telegram_admin,
                 "Register callback has wrong command information\n"
-                f"Query Data: {query.data}")
+                f"Query Data: {query.data}",
+                reply_to=msg_id)
         return
 
     text = register_message(icon, title,
