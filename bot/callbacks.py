@@ -60,6 +60,11 @@ def get_options(name):
         for option in options
     }
 
+    options |= {
+        f'{option}ь'
+        for option in options
+    }
+
     return options
 
 
