@@ -29,12 +29,14 @@ def register_buttons(hidden=False):
 
     return [
         [
-            ('🟢 Зареєструвати', f'register:process'),
-            ('🟢 Власноруч', f'register:manually'),
+            ('🟢 reg-auto', f'register:reg-auto'),
+            ('🔵 reg-hand', f'register:reg-hand'),
+            ('🟠 reg-copy', f'register:reg-copy'),
         ],
         [
-            ('⚪ Зареєстровано', f'register:already'),
-            ('🟠 Це повтор', f'register:duplicated'),
+            ('✔️ hid-auto', f'register:hid-auto'),
+            ('➕ hid-hand', f'register:hid-hand'),
+            ('✖️ hid-copy', f'register:hid-copy'),
         ],
         [
             ('Приховати опції реєстрації', f'register:hide'),

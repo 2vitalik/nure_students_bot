@@ -151,46 +151,51 @@ def callback_register(bot, query):
                 reply_to=msg_id)
         return
 
-    if cmd == 'process':
+    if cmd in ['reg-auto', 'process']:  # fixme: remove old case 'process'
         registered, already_registered = (
             coda_register(user_named, full_name, username, user_id))
 
         if already_registered:
-            icon, title, hidden = '🟠', 'Вже був зареєстрован раніше', True
+            icon, title, hidden = '🟠', 'Вже був зареєстрован раніше 🎶', True
             tg_send(user_id,
-                    "❎ Здається, ви вже були зареєстровані раніше!\n"
+                    "🟠 Здається, ви вже були зареєстровані раніше!\n"
                     "Можливо, ви відправили запит повторно\n\n"
                     "Якщо це не так, тоді звʼяжіться, будь ласка, "
                     "з викладачем: @vitaliy_lyapota")
 
         elif registered:
-            icon, title, hidden = '✔️', 'Зареєстровано автоматично', True
+            icon, title, hidden = '✔️', 'Зареєстровано автоматично 🎶', True
             tg_send(user_id,
                     "✅ Дякую, Ви були успішно зареєстровані :)")
 
         else:
-            icon, title, hidden = '🔴', 'Не вдалося автоматично', False
+            icon, title, hidden = '🔴', 'Не вдалося автоматично 🕶', False
             tg_send(conf.telegram_admin,
                     f'🚫 Немає в табличці: \n'
                     f'▪️ "{user_named}"\n'
                     f'▪️ @{username}',
                     reply_to=msg_id)
 
-    elif cmd == 'manually':
-        icon, title, hidden = '✔️', 'Зареєстровано власноруч', True
-        tg_send(user_id,
-                "✅ Дякую, Ви були успішно зареєстровані!")
+    elif cmd in ['reg-hand', 'manually']:  # fixme: remove old case 'manually'
+        icon, title, hidden = '➕', 'Зареєстровано власноруч 🎶', True
+        tg_send(user_id, "✅ Дякую, Ви були успішно зареєстровані!")
 
-    elif cmd == 'duplicated':
-        icon, title, hidden = '➕', 'Це повтор', True
+    elif cmd in ['reg-copy', 'duplicated']:  # fixme: remove old case 'duplicated'
+        icon, title, hidden = '🟠', 'Схоже це дубль? 🎶', True
         tg_send(user_id,
                 "🟠 Здається, ви вже були зареєстровані раніше\n"
                 "Можливо, ви відправили запит повторно\n\n"
                 "Якщо це не так, тоді звʼяжіться, будь ласка, "
                 "з викладачем: @vitaliy_lyapota")
 
-    elif cmd == 'already':
-        icon, title, hidden = '✔️', 'Вже зареєстровано', True
+    elif cmd in ['hid-auto']:
+        icon, title, hidden = '✔️', 'Зареєстровано автоматично 🕶', True
+
+    elif cmd in ['hid-hand']:
+        icon, title, hidden = '➕', 'Зареєстровано власноруч 🕶', True
+
+    elif cmd in ['hid-copy']:
+        icon, title, hidden = '✖️', 'Схоже це дубль 🕶', True
 
     elif cmd == 'hide':
         hidden = True
