@@ -15,7 +15,7 @@ def register_message(icon, title, user_id, username, user_named, full_name):
         f'<b>Full:</b> {full_name}\n\n' 
         f'<b>ID:</b> <code>{user_id}</code>,' 
         f' <b><a href="tg://user?id={user_id}">Link</a></b>\n' 
-        f'<b>Nick:</b> @{username}'
+        f'<b>Nick:</b> @{username if username else ""}'
     )
 
 
