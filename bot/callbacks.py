@@ -79,7 +79,7 @@ def coda_register(user_named, full_name, username, user_id):
         last_name = simplify(row['last_name'])
         first_name = simplify(row['first_name'])
         found = (
-            row['tg_username'] == f'@{username}' or
+            username and row['tg_username'] == f'@{username}' or
             last_name in options and first_name in options
         )
         if found:
