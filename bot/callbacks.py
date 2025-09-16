@@ -101,7 +101,7 @@ def callback_register(bot, query):
     if m:
         user_named = m.group(1)
     else:
-        tg_send(conf.telegram_error,
+        tg_send(conf.telegram_admin,
                 f'❌ Не вдалося знайти "Input" у повідомлені')
         return
 
@@ -109,7 +109,7 @@ def callback_register(bot, query):
     if m:
         full_name = m.group(1)
     else:
-        tg_send(conf.telegram_error,
+        tg_send(conf.telegram_admin,
                 f'❌ Не вдалося знайти "Full" у повідомлені')
         return
 
@@ -117,7 +117,7 @@ def callback_register(bot, query):
     if m:
         user_id = m.group(1)
     else:
-        tg_send(conf.telegram_error,
+        tg_send(conf.telegram_admin,
                 f'❌ Не вдалося знайти "ID" у повідомлені')
         return
 
@@ -125,7 +125,7 @@ def callback_register(bot, query):
     if m:
         username = m.group(1)
     else:
-        tg_send(conf.telegram_error,
+        tg_send(conf.telegram_admin,
                 f'❌ Не вдалося знайти "ID" у повідомлені')
         return
 
@@ -148,7 +148,7 @@ def callback_register(bot, query):
 
         else:
             icon, title, hidden = '🔴', 'Не вдалося автоматично', False
-            tg_send(conf.telegram_error,
+            tg_send(conf.telegram_admin,
                     f'🚫 Немає в табличці: \n'
                     f'▪️ "{user_named}"\n'
                     f'▪️ @{username}')
@@ -176,7 +176,7 @@ def callback_register(bot, query):
         hidden = False
 
     else:
-        tg_send(conf.telegram_error,
+        tg_send(conf.telegram_admin,
                 "Register callback has wrong command information\n"
                 f"Query Data: {query.data}")
         return
