@@ -44,10 +44,10 @@ def telegram_send(bot, chat_id, text, keyboard=None, buttons=None, silent=False)
         return bot.send_message(
             chat_id=chat_id,
             text=text,
-            reply_markup=reply_markup,
             parse_mode=telegram.ParseMode.HTML,
             disable_web_page_preview=True,
             disable_notification=silent,
+            reply_markup=reply_markup,
         )
     except BadRequest as e:
         if 'Chat not found' in str(e):
