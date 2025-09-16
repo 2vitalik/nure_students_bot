@@ -40,25 +40,18 @@ def simplify(name):
 
 
 def get_options(name):
-    parts = name.split()
-
-    first_name = last_name = patronymic = ''
-    if len(parts) == 3:
-        last_name, first_name, patronymic = parts
-    elif len(parts) == 2:
-        last_name, first_name = parts
-    # elif len(parts) == 1:
-    #     _ = parts[0]
-
-    last_name = simplify(last_name)
-    first_name = simplify(first_name)
-
-    return {
-        last_name,
-        first_name,
-        lat_to_uk(last_name),
-        lat_to_uk(first_name),
+    options = {
+        simplify(part)
+        for part in name.split()
+        if part
     }
+
+    options |= {
+        lat_to_uk(option)
+        for option in options
+    }
+
+    return options
 
 
 def coda_register(user_named, full_name, username, user_id):
