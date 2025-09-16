@@ -93,6 +93,10 @@ def callback_register(bot, query):
 
     text = query.message.text_html
 
+    first_line = text.split('\n')[0]
+    icon, title = re.search(r'(.*) <b>(.*)</b>', first_line).groups()
+    # todo: if m:
+
     m = re.search(r'<b>Input:</b> (.*)', text)
     if m:
         user_named = m.group(1)
@@ -166,10 +170,10 @@ def callback_register(bot, query):
         icon, title, hidden = '✔️', 'Вже зареєстровано', True
 
     elif cmd == 'hide':
-        icon, title, hidden = '✔️', 'Приховано', True
+        hidden = True
 
     elif cmd == 'show':
-        icon, title, hidden = '🔆', 'Знову показано', False
+        hidden = False
 
     else:
         tg_send(conf.telegram_error,
