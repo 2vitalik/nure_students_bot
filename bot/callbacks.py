@@ -115,6 +115,7 @@ def callback_register(bot, query):
     # fixme: Temporary fix to change old icons in existing messages:
     if icon == '✅' and title == 'Зареєстровано автоматично':
         icon = '✔️'
+        title = 'Зареєстровано автоматично 🎶'
 
     m = re.search(r'<b>Input:</b> (.*)', text)
     if m:
