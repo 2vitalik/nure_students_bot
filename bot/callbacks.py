@@ -89,6 +89,7 @@ def coda_register(user_named, full_name, username, user_id):
             doc.Students.update(row['@id'], {
                 'tg_id': user_id,
                 'tg_username': f'@{username}',
+                'tg_registered_at': str(datetime.now()),
             })
             registered = True
             break
