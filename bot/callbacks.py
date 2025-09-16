@@ -10,6 +10,7 @@ from tools.errors import errors
 from tools.save_update import save_update
 from tools.telegram_utils import telegram_callback
 from tools.tg import tg_send
+from tools.un_translit import lat_to_uk
 
 
 def save_callback_json(query, callback_type):
@@ -59,6 +60,13 @@ def coda_register(user_named, username, user_id):
     last_name = simplify(last_name)
     first_name = simplify(first_name)
 
+    name_options = {
+        last_name,
+        first_name,
+        lat_to_uk(last_name),
+        lat_to_uk(first_name),
+    }
+
     registered = already_registered = False
 
     for row in students:
@@ -66,8 +74,7 @@ def coda_register(user_named, username, user_id):
         coda_first_name = simplify(row['first_name'])
         found = (
             row['tg_username'] == f'@{username}' or
-            coda_last_name == last_name and coda_first_name == first_name or
-            coda_last_name == first_name and coda_first_name == last_name
+            coda_last_name in name_options and coda_first_name in name_options
         )
         if found:
             if row['tg_id']:
