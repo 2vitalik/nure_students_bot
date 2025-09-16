@@ -39,15 +39,8 @@ def simplify(name):
     return name.strip().lower().replace('`', 'ʼ').replace("'", 'ʼ').replace('&#x27;', 'ʼ')
 
 
-def coda_register(user_named, username, user_id):
-    if not username:
-        return False, False
-
-    doc = CodaDoc(conf.coda_docs['python-24'], coda_token=conf.coda_token,
-                  conf_path=f'{conf.data_path}/coda_conf')
-    students = doc.Students.all()
-
-    parts = user_named.split()
+def get_options(name):
+    parts = name.split()
 
     first_name = last_name = patronymic = ''
     if len(parts) == 3:
@@ -55,26 +48,37 @@ def coda_register(user_named, username, user_id):
     elif len(parts) == 2:
         last_name, first_name = parts
     # elif len(parts) == 1:
-    #     last_name = parts[0]
+    #     _ = parts[0]
 
     last_name = simplify(last_name)
     first_name = simplify(first_name)
 
-    name_options = {
+    return {
         last_name,
         first_name,
         lat_to_uk(last_name),
         lat_to_uk(first_name),
     }
 
+
+def coda_register(user_named, full_name, username, user_id):
+    if not username:
+        return False, False
+
+    doc = CodaDoc(conf.coda_docs['python-24'], coda_token=conf.coda_token,
+                  conf_path=f'{conf.data_path}/coda_conf')
+    students = doc.Students.all()
+
+    options = get_options(user_named) | get_options(full_name)
+
     registered = already_registered = False
 
     for row in students:
-        coda_last_name = simplify(row['last_name'])
-        coda_first_name = simplify(row['first_name'])
+        last_name = simplify(row['last_name'])
+        first_name = simplify(row['first_name'])
         found = (
             row['tg_username'] == f'@{username}' or
-            coda_last_name in name_options and coda_first_name in name_options
+            last_name in options and first_name in options
         )
         if found:
             if row['tg_id']:
@@ -147,7 +151,7 @@ def callback_register(bot, query):
 
     if cmd == 'process':
         registered, already_registered = (
-            coda_register(user_named, username, user_id))
+            coda_register(user_named, full_name, username, user_id))
 
         if already_registered:
             icon, title, hidden = '🟠', 'Вже був зареєстрован раніше', True
