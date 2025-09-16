@@ -98,6 +98,10 @@ def callback_register(bot, query):
     icon, title = re.search(r'(.*) <b>(.*)</b>', first_line).groups()
     # todo: if m:
 
+    # fixme: Temporary fix to change old icons in existing messages:
+    if icon == '✅' and title == 'Зареєстровано автоматично':
+        icon = '✔️'
+
     m = re.search(r'<b>Input:</b> (.*)', text)
     if m:
         user_named = m.group(1)
