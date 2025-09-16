@@ -20,7 +20,8 @@ def get_filename(chat_id, text, folder):
            f'{dt} - {chat_id} - {hash_value}.json'
 
 
-def tg_send(chat_id, text, keyboard=None, buttons=None, silent=False):
+def tg_send(chat_id, text, keyboard=None, buttons=None, silent=False,
+            reply_to=None):
     out_filename = get_filename(chat_id, text, 'output')
 
     line = '-' * 79
@@ -36,7 +37,8 @@ def tg_send(chat_id, text, keyboard=None, buttons=None, silent=False):
     append(out_filename, output)
 
     try:
-        message = telegram_send(bot, chat_id, text, keyboard, buttons, silent)
+        message = telegram_send(bot, chat_id, text, keyboard, buttons, silent,
+                                reply_to)
         append(out_filename, 'SENT')
 
         msg_filename = get_filename(chat_id, text, 'sent')

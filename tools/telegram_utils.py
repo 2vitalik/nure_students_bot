@@ -30,7 +30,8 @@ class MessageNotModifiedError(BadRequest):
     pass
 
 
-def telegram_send(bot, chat_id, text, keyboard=None, buttons=None, silent=False):
+def telegram_send(bot, chat_id, text, keyboard=None, buttons=None, silent=False,
+                  reply_to=None):
     bot.send_chat_action(chat_id=chat_id, action=telegram.ChatAction.TYPING)
 
     if keyboard:
@@ -47,6 +48,7 @@ def telegram_send(bot, chat_id, text, keyboard=None, buttons=None, silent=False)
             parse_mode=telegram.ParseMode.HTML,
             disable_web_page_preview=True,
             disable_notification=silent,
+            reply_to_message_id=reply_to,
             reply_markup=reply_markup,
         )
     except BadRequest as e:
