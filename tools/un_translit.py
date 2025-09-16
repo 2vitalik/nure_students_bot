@@ -92,7 +92,7 @@ def lat_to_uk(text: str) -> str:
                     cyr = "ю"
                 elif seg2_low == "yi":
                     # На початку слова — Ї, інакше часто це розділ "…иі…" але в КМУ "Yi" саме на початку
-                    cyr = "ї" if at_start else "ї"
+                    cyr = "ї" if at_start else "ий"
 
                 out.append(apply_case(seg2, cyr))
                 i += 2
@@ -172,7 +172,8 @@ if __name__ == "__main__":
         "Zaporіzhzhia",  # Запоріжжя (часто пишуть Zaporizhzhia; подвійне zh → ж + жд/жж — це вже не КМУ, але приклад)
         "Kremenchuk",    # Кременчук
         "Lviv",          # Львів
-        "Ob'yizd"  ,     # штучний тест для апострофа
+        "Ob'yizd",       # Обʼїзд
+        "Pshenychnyi",   # Пшеничний
     ]
     for s in samples:
         print(s, "→", lat_to_uk(s))
