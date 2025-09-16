@@ -98,7 +98,7 @@ def callback_register(bot, query):
         user_named = m.group(1)
     else:
         tg_send(conf.telegram_error,
-                f'⛔️ Не вдалося знайти "Input" у повідомлені')
+                f'❌ Не вдалося знайти "Input" у повідомлені')
         return
 
     m = re.search(r'<b>Full:</b> (.*)', text)
@@ -106,7 +106,7 @@ def callback_register(bot, query):
         full_name = m.group(1)
     else:
         tg_send(conf.telegram_error,
-                f'⛔️ Не вдалося знайти "Full" у повідомлені')
+                f'❌ Не вдалося знайти "Full" у повідомлені')
         return
 
     m = re.search(r'<b>ID:</b> <code>(.*)</code>,', text)
@@ -114,7 +114,7 @@ def callback_register(bot, query):
         user_id = m.group(1)
     else:
         tg_send(conf.telegram_error,
-                f'⛔️ Не вдалося знайти "ID" у повідомлені')
+                f'❌ Не вдалося знайти "ID" у повідомлені')
         return
 
     m = re.search(r'<b>Nick:</b> @(.*)', text)
@@ -122,7 +122,7 @@ def callback_register(bot, query):
         username = m.group(1)
     else:
         tg_send(conf.telegram_error,
-                f'⛔️ Не вдалося знайти "ID" у повідомлені')
+                f'❌ Не вдалося знайти "ID" у повідомлені')
         return
 
     if cmd == 'process':
@@ -130,7 +130,7 @@ def callback_register(bot, query):
             coda_register(user_named, username, user_id))
 
         if already_registered:
-            icon, title, hidden = '❎', 'Вже був зареєстрован раніше', True
+            icon, title, hidden = '🟠', 'Вже був зареєстрован раніше', True
             tg_send(user_id,
                     "❎ Здається, ви вже були зареєстровані раніше!\n"
                     "Можливо, ви відправили запит повторно\n\n"
@@ -138,32 +138,32 @@ def callback_register(bot, query):
                     "з викладачем: @vitaliy_lyapota")
 
         elif registered:
-            icon, title, hidden = '✅', 'Зареєстровано автоматично', True
+            icon, title, hidden = '✔️', 'Зареєстровано автоматично', True
             tg_send(user_id,
                     "✅ Дякую, Ви були успішно зареєстровані :)")
 
         else:
-            icon, title, hidden = '⛔️', 'Не вдалося автоматично', False
+            icon, title, hidden = '🔴', 'Не вдалося автоматично', False
             tg_send(conf.telegram_error,
-                    f'⛔️ Немає в табличці: \n'
+                    f'🚫 Немає в табличці: \n'
                     f'▪️ "{user_named}"\n'
                     f'▪️ @{username}')
 
     elif cmd == 'manually':
-        icon, title, hidden = '✅', 'Зареєстровано власноруч', True
+        icon, title, hidden = '✔️', 'Зареєстровано власноруч', True
         tg_send(user_id,
                 "✅ Дякую, Ви були успішно зареєстровані!")
 
     elif cmd == 'duplicated':
-        icon, title, hidden = '❎', 'Це повтор', True
+        icon, title, hidden = '➕', 'Це повтор', True
         tg_send(user_id,
-                "❎ Здається, ви вже були зареєстровані раніше\n"
+                "🟠 Здається, ви вже були зареєстровані раніше\n"
                 "Можливо, ви відправили запит повторно\n\n"
                 "Якщо це не так, тоді звʼяжіться, будь ласка, "
                 "з викладачем: @vitaliy_lyapota")
 
     elif cmd == 'already':
-        icon, title, hidden = '✅', 'Вже зареєстровано', True
+        icon, title, hidden = '✔️', 'Вже зареєстровано', True
 
     elif cmd == 'hide':
         icon, title, hidden = '✔️', 'Приховано', True

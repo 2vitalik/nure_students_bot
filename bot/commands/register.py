@@ -29,12 +29,12 @@ def register_buttons(hidden=False):
 
     return [
         [
-            ('✅ Зареєструвати', f'register:process'),
-            ('✅ Власноруч', f'register:manually'),
+            ('🟢 Зареєструвати', f'register:process'),
+            ('🟢 Власноруч', f'register:manually'),
         ],
         [
-            ('✔️ Зареєстровано', f'register:already'),
-            ('❎ Це повтор', f'register:duplicated'),
+            ('⚪ Зареєстровано', f'register:already'),
+            ('🟠 Це повтор', f'register:duplicated'),
         ],
         [
             ('Приховати опції реєстрації', f'register:hide'),
@@ -85,7 +85,7 @@ def register(update, context):
     # data = f'{user.id}|{user.username}|{user_named}'  # fixme: remove unsuccessful attempt
     # print(data)
 
-    text = register_message('⭐️', 'Запит на реєстрацію',
+    text = register_message('🟡', 'Запит на реєстрацію',
                             user.id, user.username, user_named, full_name)
 
     try:
