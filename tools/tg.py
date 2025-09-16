@@ -1,14 +1,13 @@
 import time
 from datetime import datetime
 
-import shared_utils.api.telegram.telegram_utils as tg
 from shared_utils.io.io import append
 from shared_utils.io.json import json_dumps, json_dump
 from telegram import Bot
 from telegram.error import TimedOut, RetryAfter
 
 import conf
-
+from tools.telegram_utils import telegram_send
 
 bot = Bot(conf.telegram_token)
 
@@ -37,7 +36,7 @@ def tg_send(chat_id, text, keyboard=None, buttons=None, silent=False):
     append(out_filename, output)
 
     try:
-        message = tg.send(bot, chat_id, text, keyboard, buttons, silent)
+        message = telegram_send(bot, chat_id, text, keyboard, buttons, silent)
         append(out_filename, 'SENT')
 
         msg_filename = get_filename(chat_id, text, 'sent')

@@ -1,11 +1,11 @@
 import re
 from datetime import datetime
 
-import shared_utils.api.telegram.telegram_utils as tg
 from shared_utils.io.json import json_dump
 
 import conf
 from src.utils.tg import basic_handler, tg_send
+from tools.telegram_utils import telegram_send
 
 
 class TextHandler:
@@ -17,8 +17,8 @@ class TextHandler:
     msg = None
 
     def send(self, message, keyboard=None, buttons=None):
-        return tg.send(self.bot, self.chat_id, message,
-                       keyboard=keyboard, buttons=buttons, silent=True)
+        return telegram_send(self.bot, self.chat_id, message,
+                             keyboard=keyboard, buttons=buttons, silent=True)
 
     def extract_coda_column(self, options):
         p = re.compile(r'\{([^}]+)}')

@@ -1,7 +1,6 @@
 import re
 from datetime import datetime
 
-import shared_utils.api.telegram.telegram_utils as tg
 from shared_utils.api.coda.v2.doc import CodaDoc
 from shared_utils.io.json import json_dump
 
@@ -9,6 +8,7 @@ import conf
 from bot.commands.register import register_message, register_buttons
 from tools.errors import errors
 from tools.save_update import save_update
+from tools.telegram_utils import telegram_callback
 from tools.tg import tg_send
 
 
@@ -184,4 +184,4 @@ def callback_register(bot, query):
     text = register_message(icon, title,
                             user_id, username, user_named, full_name)
 
-    tg.callback(query, text, register_buttons(hidden=hidden))
+    telegram_callback(query, text, register_buttons(hidden=hidden))
