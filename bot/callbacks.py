@@ -40,10 +40,19 @@ def simplify(name):
 
 
 def get_options(name):
-    options = {
-        simplify(part)
+    options = [
+        part
         for part in name.split()
         if part
+    ]
+
+    if len(options) == 1:
+        if m := re.match(r'^([A-Z][a-z]+)([A-Z][a-z]+)$', options[0]):
+            options = m.groups()
+
+    options = {
+        simplify(option)
+        for option in options
     }
 
     options |= {
@@ -200,3 +209,9 @@ def callback_register(bot, query):
                             user_id, username, user_named, full_name)
 
     telegram_callback(query, text, register_buttons(hidden=hidden))
+
+
+if __name__ == '__main__':
+    print(get_options('VitaliiLiapota'))
+    print(get_options('Vitalii Liapota'))
+    print(get_options('Віталій Ляпота'))
