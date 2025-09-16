@@ -36,7 +36,10 @@ def callbacks(update, context):
 
 
 def simplify(name):
-    return name.strip().lower().replace('`', 'ʼ').replace("'", 'ʼ').replace('&#x27;', 'ʼ')
+    name = name.strip().lower()
+    for char in ['`', "'", '’', '&#x27;']:
+        name = name.replace(char, 'ʼ')
+    return name
 
 
 def get_options(name):
