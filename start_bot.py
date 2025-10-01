@@ -9,6 +9,7 @@ import conf
 from bot.callbacks import callbacks
 from bot.commands.coda_tg import coda_tg
 from bot.commands.coda_update import coda_update
+from bot.commands.poll import poll
 from bot.messages import messages
 from bot.polls import process_poll, process_poll_answer
 from bot.commands.register import register
@@ -43,6 +44,7 @@ def start_bot():
     d.add_handler(CommandHandler('text', text_handler.text))
     d.add_handler(CommandHandler('vote', text_handler.vote))
     d.add_handler(CommandHandler('register', register))
+    d.add_handler(CommandHandler('poll', poll))
 
     # members:
     d.add_handler(MessageHandler(Filters.status_update.new_chat_members,

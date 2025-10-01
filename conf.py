@@ -29,6 +29,14 @@ poll_threads = {
     # 'oop-22': 123,  # should be set in `local_conf.py`
 }
 
+# should be set in `local_conf.py`
+threads = {
+    # 'p24': {
+    #     'pz': 123,
+    #     ...
+    # },
+}
+
 coda_docs = {
     'oop-22': 'd1GDyxjRqoL',
     'oop-23': 'dGBWPSQDIDf',
