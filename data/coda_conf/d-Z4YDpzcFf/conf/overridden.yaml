@@ -9,3 +9,26 @@ grid-JhYReYR6or:
     c-nFd8r2U8eK: tg_username
     c-oNL-SmQgny: tg_id
     c-le95vUGdKp: tg_registered_at
+grid-eoe-hLtbin:
+  name: tg_polls
+  columns:
+    c-z63P9g5Cnk: tg_poll_id
+    c-a1OSjOGS8T: question
+    c-gVLptE2I2s: options
+    c-J7k06XGa58: slug
+    c-dFt0kGpopv: chat_id
+    c-SsZRxxP2yG: thread_id
+    c-s0bLowbeA2: testing
+grid-Zt8rwszlcG:
+  name: tg_options
+  columns:
+    c-pv9UEgpMBw: tg_poll
+    c-tFUqlpeVzG: option
+    c-Uh1DLFTmES: icon
+    c-1hE6W2QJoV: index
+grid-bC2s8-JNVj:
+  name: tg_answers
+  columns:
+    c-jlj5nB70JR: answer
+    c-AJIdx80RCc: tg_poll
+    c-cyDZsyFx0E: tg_user_id
