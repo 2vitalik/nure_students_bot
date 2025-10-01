@@ -3,6 +3,8 @@ from pathlib import Path
 coda_token = None  # should be set in `local_conf.py`
 coda_doc_id = None  # should be set in `local_conf.py`
 
+mongo_cluster = None  # should be set in `local_conf.py`
+
 telegram_token = None  # should be set in `local_conf.py`
 telegram_admin = None  # should be set in `local_conf.py`
 telegram_error = None  # should be set in `local_conf.py`

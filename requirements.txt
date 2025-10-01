@@ -1,5 +1,6 @@
 python-telegram-bot==13.*
 PyYAML
 requests
+pymongo[srv]==4.*
 
 git+ssh://git@github.com/2vitalik/shared_utils.git
