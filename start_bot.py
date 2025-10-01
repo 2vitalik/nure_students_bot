@@ -24,6 +24,8 @@ def start_bot():
         level=logging.DEBUG,
         format='[%(asctime)s] %(levelname)s (%(name)s):  %(message)s'
     )
+    logging.getLogger("pymongo.topology").setLevel(logging.INFO)
+
     shared_conf.slack_hooks = conf.slack_hooks
 
     bot = Bot(conf.telegram_token)
