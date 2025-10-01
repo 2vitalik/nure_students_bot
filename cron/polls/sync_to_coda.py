@@ -3,7 +3,7 @@ from pprint import pprint
 import up  # to go to root folder
 from cron.polls.coda_doc import doc
 from mongo.db import db
-from scripts.db_students.http_error import retry_on_http_error
+from tools.http_error import retry_on_http_error
 from tools.errors import errors
 
 
