@@ -1,3 +1,5 @@
+from typing import List, Dict, Tuple, Optional
+
 import conf
 from mongo.db import db
 from tools.errors import errors
@@ -8,13 +10,13 @@ from tools.tg import tg_send, bot
 class P:
     slug: str
     question: str
-    options: list[str]
-    db_options: list[dict[str, str]]
+    options: List[str]
+    db_options: List[Dict[str, str]]
     is_anonymous: bool
     is_multiple: bool
     is_silent: bool
     is_testing: bool
-    chat_ids: list[tuple[int, int | None]]
+    chat_ids: List[Tuple[int, Optional[int]]]
 
 
 def get_chat_ids(params, err_chat):
